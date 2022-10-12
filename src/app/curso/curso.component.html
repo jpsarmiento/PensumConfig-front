@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="col-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="h4">Nombre</th>
+          <th class="h4">Sigla</th>
+          <th class="h4">Codigo</th>
+          <th class="h4">Creditos</th>
+          <th class="h4">Epsilon</th>
+          <th class="h4">Tipo E</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of cursos">
+          <td>
+            <dd>{{c.nombre}}</dd>
+          </td>
+          <td>
+            <dd>{{c.sigla}}</dd>
+          </td>
+          <td>
+            <dd>{{c.codigo}}</dd>
+          </td>
+          <td>
+            <dd>{{c.creditos}}</dd>
+          </td>
+          <td>
+            <dd>{{c.es_epsilon}}</dd>
+          </td>
+          <td>
+            <dd>{{c.es_tipo_e}}</dd>
+          </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
