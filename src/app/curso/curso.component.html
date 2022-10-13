@@ -1,38 +1,43 @@
 <div class="container-fluid">
-  <div class="col-6">
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="h4">Nombre</th>
-          <th class="h4">Sigla</th>
-          <th class="h4">Codigo</th>
-          <th class="h4">Creditos</th>
-          <th class="h4">Epsilon</th>
-          <th class="h4">Tipo E</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let c of cursos">
-          <td>
-            <dd>{{c.nombre}}</dd>
-          </td>
-          <td>
-            <dd>{{c.sigla}}</dd>
-          </td>
-          <td>
-            <dd>{{c.codigo}}</dd>
-          </td>
-          <td>
-            <dd>{{c.creditos}}</dd>
-          </td>
-          <td>
-            <dd>{{c.es_epsilon}}</dd>
-          </td>
-          <td>
-            <dd>{{c.es_tipo_e}}</dd>
-          </td>
-      </tr>
-      </tbody>
-    </table>
+  <h3> Cursos existentes: </h3>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-8">
+    <div class="row">
+      <div class="col-sm-4" *ngFor="let c of cursos">
+        <div class="card text-center" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{c.nombre}}</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Código: {{c.sigla}}-{{c.codigo}}</li>
+              <li class="list-group-item">Créditos: {{c.creditos}}</li>
+            </ul>
+            <button type="button" class="btn btn-outline-primary me-2" (click)="onSelected(c)">Ver detalle</button>
+            <button type="button" class="btn btn-outline-danger ">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="col-4">
+    <div class="row">
+      <div *ngIf="selected">
+        <h3 class="text-center"> Curso seleccionado:</h3>
+        <div class = "card text-center">
+          <div class="card-body">
+            <h5 class="card-title">{{selectedCurso.nombre}}</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Código: {{selectedCurso.sigla}}-{{selectedCurso.codigo}}</li>
+              <li class="list-group-item">Créditos: {{selectedCurso.creditos}}</li>
+              <li class="list-group-item">Tipo E: {{selectedCurso.es_tipo_e}}</li>
+              <li class="list-group-item">Tipo Epsilon: {{selectedCurso.es_epsilon}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
