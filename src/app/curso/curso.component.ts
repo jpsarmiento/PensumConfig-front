@@ -15,15 +15,20 @@ export class CursoComponent implements OnInit {
 
   constructor(private cursoService: CursoService) { }
 
-  getCursos() {
-    this.cursoService.getCursos().subscribe(cursos => {
-      this.cursos = cursos;
-    });
+  getCursos(): void {
+    this.cursoService.getCursos().subscribe({next: cursos =>
+    this.cursos = cursos, error: e => console.error(e)});
   }
 
   onSelected(curso: Curso): void {
     this.selected = true;
     this.selectedCurso = curso;
+  }
+
+  deleteCurso(curso: Curso) {
+    this.cursoService.deleteCurso(curso.id).subscribe(response => {
+      this.cursos = this.cursos.filter(item => item.id != curso.id);
+    })
   }
 
   ngOnInit() {
