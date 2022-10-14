@@ -20,4 +20,8 @@ export class CursoService {
   deleteCurso(id: string) {
     return this.http.delete(this.apiUrl+'/'+id)
   }
+
+  createCurso(curso: Curso): Observable<Curso> {
+    return this.http.post<Curso>(this.apiUrl, curso);
+ }
 }

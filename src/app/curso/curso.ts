@@ -4,8 +4,8 @@ export class Curso {
   sigla: string;
   codigo: number;
   creditos: number;
-  es_epsilon: boolean;
-  es_tipo_e: boolean;
+  es_epsilon: Boolean;
+  es_tipo_e: Boolean;
 
   public constructor(id: string, nombre: string, sigla: string, codigo: number, creditos: number, es_epsilon: boolean, es_tipo_e: boolean, ) {
     this.id = id;
