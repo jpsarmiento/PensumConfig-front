@@ -13,6 +13,7 @@ export class CursoComponent implements OnInit {
 
   cursos: Array<Curso> = [];
   selected: Boolean = false;
+  cursoNull! : Curso;
   selectedCurso!: Curso;
   cursoForm! : FormGroup;
   epsilon: Boolean = false;
@@ -38,6 +39,10 @@ export class CursoComponent implements OnInit {
   deleteCurso(curso: Curso) {
     this.cursoService.deleteCurso(curso.id).subscribe(response => {
       this.cursos = this.cursos.filter(item => item.id != curso.id);
+      if(curso == this.selectedCurso) {
+        this.selectedCurso = this.cursoNull;
+        this.selected = false;
+      }
     })
   }
 
