@@ -17,6 +17,10 @@ export class CursoService {
     return this.http.get<Curso[]>(this.apiUrl);
   }
 
+  getCurso(id: string): Observable<Curso> {
+    return this.http.get<Curso>(this.apiUrl+'/'+id);
+  }
+
   deleteCurso(id: string) {
     return this.http.delete(this.apiUrl+'/'+id)
   }
@@ -24,4 +28,9 @@ export class CursoService {
   createCurso(curso: Curso): Observable<Curso> {
     return this.http.post<Curso>(this.apiUrl, curso);
  }
+
+  updateCurso(id: string, curso: Curso): Observable<Curso> {
+    return this.http.put<Curso>(this.apiUrl+"/"+id, curso);
+  }
+
 }

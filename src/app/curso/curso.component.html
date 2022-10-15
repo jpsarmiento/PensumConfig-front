@@ -6,7 +6,7 @@
     </div>
     <div class="col">
       <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">Agregar</button>
+        data-bs-target="#exampleModal" (click)="formularioCrear()">Agregar</button>
     </div>
   </div>
 </div>
@@ -44,9 +44,12 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Código: {{selectedCurso.sigla}}-{{selectedCurso.codigo}}</li>
                 <li class="list-group-item">Créditos: {{selectedCurso.creditos}}</li>
-                <li class="list-group-item">Tipo E: {{selectedCurso.es_tipo_e}}</li>
                 <li class="list-group-item">Tipo Epsilon: {{selectedCurso.es_epsilon}}</li>
+                <li class="list-group-item">Tipo E: {{selectedCurso.es_tipo_e}}</li>
               </ul>
+
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+              data-bs-target="#myModal" (click)="formularioModificar()">Editar</button>
             </div>
           </div>
         </div>
@@ -54,6 +57,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- Modal Form -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -65,11 +69,10 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="cursoForm" (ngSubmit)="!cursoForm.invalid">
-
           <!--Nombre-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="nombre">Nombre</label>
-            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre del curso" />
+            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre del curso" value="HOLA"/>
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               cursoForm.get('nombre')!.hasError('required') &&
               cursoForm.get('nombre')!.touched">
@@ -80,7 +83,6 @@
               Nombre muy corto
             </div>
           </div>
-
           <!--Sigla-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="sigla">Sigla</label>
@@ -99,7 +101,6 @@
               La sigla debe ser de 4 caracteres
             </div>
           </div>
-
           <!--Codigo-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="codigo">Codigo</label>
@@ -118,7 +119,6 @@
             El codigo debe estar entre el 1000 y el 7000
             </div>
           </div>
-
           <!--Creditos-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="creditos">Creditos</label>
@@ -133,7 +133,6 @@
               Los creditos deben ser un numero positivo
             </div>
           </div>
-
           <!--Epsilon-->
           <div class="form-group mx-sm-3 mb-2">
             <input id="es_epsilon" class="form-check-input" value="" type="checkbox" (change)="checkEpsilon(!epsilon)">
@@ -149,11 +148,108 @@
             </label>
           </div>
         </form>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cursoForm.reset()">Cancelar</button>
         <button type="submit" class="btn btn-primary" [disabled]="!cursoForm.valid" (click)="createCurso(cursoForm.value)">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Form 2 -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="myModalLabel">Editar curso</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="cursoForm" (ngSubmit)="!cursoForm.invalid">
+          <!--Nombre-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="nombre">Nombre</label>
+            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre del curso" value="HOLA"/>
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              cursoForm.get('nombre')!.hasError('required') &&
+              cursoForm.get('nombre')!.touched">
+              Nombre requerido
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="cursoForm.get('nombre')!.hasError('minlength')">
+              Nombre muy corto
+            </div>
+          </div>
+          <!--Sigla-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="sigla">Sigla</label>
+            <input novalidate id="sigla" class="form-control" formControlName="sigla" placeholder="Sigla del curso" style="text-transform: uppercase" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              cursoForm.get('sigla')!.hasError('required') &&
+              cursoForm.get('sigla')!.touched">
+              Sigla requerida
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="cursoForm.get('sigla')!.hasError('minlength')">
+              La sigla debe ser de 4 caracteres
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+            *ngIf="cursoForm.get('sigla')!.hasError('maxlength')">
+              La sigla debe ser de 4 caracteres
+            </div>
+          </div>
+          <!--Codigo-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="codigo">Codigo</label>
+            <input novalidate id="codigo" class="form-control" formControlName="codigo" placeholder="Codigo del curso" type="number"/>
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              cursoForm.get('codigo')!.hasError('required') &&
+              cursoForm.get('codigo')!.touched ">
+              Codigo requerido
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="cursoForm.get('codigo')!.hasError('min')">
+              El codigo debe estar entre el 1000 y el 7000
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+            *ngIf="cursoForm.get('codigo')!.hasError('max')">
+            El codigo debe estar entre el 1000 y el 7000
+            </div>
+          </div>
+          <!--Creditos-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="creditos">Creditos</label>
+            <input novalidate id="creditos" class="form-control" formControlName="creditos" placeholder="Creditos del curso" type="number"/>
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              cursoForm.get('creditos')!.hasError('required') &&
+              cursoForm.get('creditos')!.touched">
+            Creditos requeridos
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="cursoForm.get('creditos')!.hasError('min')">
+              Los creditos deben ser un numero positivo
+            </div>
+          </div>
+          <!--Epsilon-->
+          <div class="form-group mx-sm-3 mb-2">
+            <input id="es_epsilon" class="form-check-input" value="" type="checkbox" (change)="checkEpsilon2(!epsilon2)">
+            <label class="form-check-label" for="es_epsilon">
+              Es epsilon
+            </label>
+          </div>
+          <!--Tipo E-->
+          <div class="form-group mx-sm-3 mb-2">
+            <input id="es_tipo_e" class="form-check-input" value="" type="checkbox" (change)="checkE2(!tipoE2)">
+            <label class="form-check-label" for="es_tipo_e">
+              Es tipo E
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cursoForm.reset()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!cursoForm.valid" (click)="updateCurso(cursoForm.value)">Crear</button>
       </div>
     </div>
   </div>

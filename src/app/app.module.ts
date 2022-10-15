@@ -8,12 +8,14 @@ import { CursoModule } from './curso/curso.module';
 import { HttpErrorInterceptorService } from './interceptors/HttpErrorInterceptorService.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
    ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     CursoModule,
