@@ -2,7 +2,7 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <div class="col-11">
-      <h3> Cursos existentes: </h3>
+      <h3> Reglas existentes: </h3>
     </div>
     <div class="col">
       <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -14,16 +14,16 @@
 <div class="container-fluid">
   <div class="row">
 
-    <!-- Lista de cursos -->
+    <!-- Lista de reglas -->
     <div class="col">
       <div class="row">
-        <div class="col-2 mt-2" *ngFor="let c of cursos">
+        <div class="col-2 mt-2" *ngFor="let c of reglas">
           <div class="card text-center">
             <div class="card-body">
-              <h5 class="card-title">{{c.sigla}}-{{c.codigo}}</h5>
+              <h5 class="card-title">{{c.nombre}}</h5>
               <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
                 data-bs-target="#detalleModal" (click)="onSelected(c)">Ver detalle</button>
-              <button type="button" class="btn btn-outline-danger" (click)="deleteCurso(c)">Eliminar</button>
+              <button type="button" class="btn btn-outline-danger" (click)="deleteRegla(c)">Eliminar</button>
             </div>
           </div>
         </div>
@@ -35,104 +35,89 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear un nuevo curso</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear una nueva regla</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="cursoForm" (ngSubmit)="!cursoForm.invalid">
+        <form [formGroup]="reglaForm" (ngSubmit)="!reglaForm.invalid">
           <!--Nombre-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="nombre">Nombre</label>
-            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre del curso"
-              value="HOLA" />
+            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre de la regla"/>
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('nombre')!.hasError('required') &&
-              cursoForm.get('nombre')!.touched">
+              reglaForm.get('nombre')!.hasError('required') &&
+              reglaForm.get('nombre')!.touched">
               Nombre requerido
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('nombre')!.hasError('minlength')">
+              *ngIf="reglaForm.get('nombre')!.hasError('minlength')">
               Nombre muy corto
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('nombre')!.hasError('maxlength')">
+              *ngIf="reglaForm.get('nombre')!.hasError('maxlength')">
               Nombre muy largo
             </div>
           </div>
-          <!--Sigla-->
+          <!--Sem inicio-->
           <div class="form-group mx-sm-3 mb-2">
-            <label for="sigla">Sigla</label>
-            <input novalidate id="sigla" class="form-control" formControlName="sigla" placeholder="Sigla del curso"
-              style="text-transform: uppercase" />
-            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('sigla')!.hasError('required') &&
-              cursoForm.get('sigla')!.touched">
-              Sigla requerida
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('sigla')!.hasError('minlength')">
-              La sigla debe ser de 4 caracteres
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('sigla')!.hasError('maxlength')">
-              La sigla debe ser de 4 caracteres
-            </div>
-          </div>
-          <!--Codigo-->
-          <div class="form-group mx-sm-3 mb-2">
-            <label for="codigo">Codigo</label>
-            <input novalidate id="codigo" class="form-control" formControlName="codigo" placeholder="Codigo del curso"
+            <label for="semestre_inicio">Semestre de inicio</label>
+            <input novalidate id="semestre_inicio" class="form-control" formControlName="semestre_inicio" placeholder="Semestre de inicio"
               type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('codigo')!.hasError('required') &&
-              cursoForm.get('codigo')!.touched ">
-              Codigo requerido
+              reglaForm.get('semestre_inicio')!.hasError('required') &&
+              reglaForm.get('semestre_inicio')!.touched ">
+              Semestre de inicio requerido
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('codigo')!.hasError('min')">
-              El codigo debe estar entre el 1000 y el 7000
+              *ngIf="reglaForm.get('semestre_inicio')!.hasError('min')">
+              El semestre de inicio debe estar entre el 2000-01 y el 2050-02
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('codigo')!.hasError('max')">
-              El codigo debe estar entre el 1000 y el 7000
+              *ngIf="reglaForm.get('semestre_inicio')!.hasError('max')">
+              El semestre de inicio debe estar entre el 2000-01 y el 2050-02
+            </div>
+          </div>
+          <!--Sem inicio-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="semestre_vigencia">Semestre de vigencia</label>
+            <input novalidate id="semestre_vigencia" class="form-control" formControlName="semestre_vigencia" placeholder="Semestre de vigencia"
+              type="number" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              reglaForm.get('semestre_vigencia')!.hasError('required') &&
+              reglaForm.get('semestre_vigencia')!.touched ">
+              Semestre de vigencia requerido
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="reglaForm.get('semestre_vigencia')!.hasError('min')">
+              El semestre de vigencia debe estar entre el 2000-01 y el 2050-02
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="reglaForm.get('semestre_vigencia')!.hasError('max')">
+              El semestre de vigencia debe estar entre el 2000-01 y el 2050-02
             </div>
           </div>
           <!--Creditos-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="creditos">Creditos</label>
             <input novalidate id="creditos" class="form-control" formControlName="creditos"
-              placeholder="Creditos del curso" type="number" />
+              placeholder="Creditos de la regla" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('creditos')!.hasError('required') &&
-              cursoForm.get('creditos')!.touched">
+              reglaForm.get('creditos')!.hasError('required') &&
+              reglaForm.get('creditos')!.touched">
               Creditos requeridos
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('creditos')!.hasError('min')">
+              *ngIf="reglaForm.get('creditos')!.hasError('min')">
               Los creditos deben ser un numero positivo
             </div>
-          </div>
-          <!--Epsilon-->
-          <div class="form-group mx-sm-3 mb-2">
-            <input id="es_epsilon" class="form-check-input" value="" type="checkbox" (change)="checkEpsilon(!epsilon)">
-            <label class="form-check-label" for="es_epsilon">
-              Es epsilon
-            </label>
-          </div>
-          <!--Tipo E-->
-          <div class="form-group mx-sm-3 mb-2">
-            <input id="es_tipo_e" class="form-check-input" value="" type="checkbox" (change)="checkE(!tipoE)">
-            <label class="form-check-label" for="es_tipo_e">
-              Es tipo E
-            </label>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-          (click)="cursoForm.reset()">Cancelar</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!cursoForm.valid"
-          (click)="createCurso(cursoForm.value)">Crear</button>
+          (click)="reglaForm.reset()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!reglaForm.valid"
+          (click)="createRegla(reglaForm.value)">Crear</button>
       </div>
     </div>
   </div>
@@ -143,106 +128,90 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="myModalLabel">Editar curso</h1>
+        <h1 class="modal-title fs-5" id="myModalLabel">Editar regla</h1>
         <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#detalleModal" aria-label="Close"
-          (click)="cursoForm.reset()"></button>
+          (click)="reglaForm.reset()"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="cursoForm" (ngSubmit)="!cursoForm.invalid">
+        <form [formGroup]="reglaForm" (ngSubmit)="!reglaForm.invalid">
           <!--Nombre-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="nombre">Nombre</label>
-            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre del curso"
-              value="HOLA" />
+            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre de la regla"/>
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('nombre')!.hasError('required') &&
-              cursoForm.get('nombre')!.touched">
+              reglaForm.get('nombre')!.hasError('required') &&
+              reglaForm.get('nombre')!.touched">
               Nombre requerido
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('nombre')!.hasError('minlength')">
+              *ngIf="reglaForm.get('nombre')!.hasError('minlength')">
               Nombre muy corto
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('nombre')!.hasError('maxlength')">
+              *ngIf="reglaForm.get('nombre')!.hasError('maxlength')">
               Nombre muy largo
             </div>
           </div>
-          <!--Sigla-->
+          <!--Sem inicio-->
           <div class="form-group mx-sm-3 mb-2">
-            <label for="sigla">Sigla</label>
-            <input novalidate id="sigla" class="form-control" formControlName="sigla" placeholder="Sigla del curso"
-              style="text-transform: uppercase" />
-            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('sigla')!.hasError('required') &&
-              cursoForm.get('sigla')!.touched">
-              Sigla requerida
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('sigla')!.hasError('minlength')">
-              La sigla debe ser de 4 caracteres
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('sigla')!.hasError('maxlength')">
-              La sigla debe ser de 4 caracteres
-            </div>
-          </div>
-          <!--Codigo-->
-          <div class="form-group mx-sm-3 mb-2">
-            <label for="codigo">Codigo</label>
-            <input novalidate id="codigo" class="form-control" formControlName="codigo" placeholder="Codigo del curso"
+            <label for="semestre_inicio">Semestre de inicio</label>
+            <input novalidate id="semestre_inicio" class="form-control" formControlName="semestre_inicio" placeholder="Semestre de inicio"
               type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('codigo')!.hasError('required') &&
-              cursoForm.get('codigo')!.touched ">
-              Codigo requerido
+              reglaForm.get('semestre_inicio')!.hasError('required') &&
+              reglaForm.get('semestre_inicio')!.touched ">
+              Semestre de inicio requerido
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('codigo')!.hasError('min')">
-              El codigo debe estar entre el 1000 y el 7000
+              *ngIf="reglaForm.get('semestre_inicio')!.hasError('min')">
+              El semestre de inicio debe estar entre el 2000-01 y el 2050-02
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('codigo')!.hasError('max')">
-              El codigo debe estar entre el 1000 y el 7000
+              *ngIf="reglaForm.get('semestre_vigencia')!.hasError('max')">
+              El semestre de inicio debe estar entre el 2000-01 y el 2050-02
+            </div>
+          </div>
+          <!--Sem inicio-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="semestre_vigencia">Semestre de vigencia</label>
+            <input novalidate id="semestre_vigencia" class="form-control" formControlName="semestre_vigencia" placeholder="Semestre de vigencia"
+              type="number" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              reglaForm.get('semestre_vigencia')!.hasError('required') &&
+              reglaForm.get('semestre_vigencia')!.touched ">
+              Semestre de vigencia requerido
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="reglaForm.get('semestre_vigencia')!.hasError('min')">
+              El semestre de vigencia debe estar entre el 2000-01 y el 2050-02
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="reglaForm.get('semestre_vigencia')!.hasError('max')">
+              El semestre de vigencia debe estar entre el 2000-01 y el 2050-02
             </div>
           </div>
           <!--Creditos-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="creditos">Creditos</label>
             <input novalidate id="creditos" class="form-control" formControlName="creditos"
-              placeholder="Creditos del curso" type="number" />
+              placeholder="Creditos de la regla" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
-              cursoForm.get('creditos')!.hasError('required') &&
-              cursoForm.get('creditos')!.touched">
+              reglaForm.get('creditos')!.hasError('required') &&
+              reglaForm.get('creditos')!.touched">
               Creditos requeridos
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="cursoForm.get('creditos')!.hasError('min')">
+              *ngIf="reglaForm.get('creditos')!.hasError('min')">
               Los creditos deben ser un numero positivo
             </div>
-          </div>
-          <!--Epsilon-->
-          <div class="form-group mx-sm-3 mb-2">
-            <input id="es_epsilon" class="form-check-input" value="" type="checkbox"
-              (change)="checkEpsilon2(!epsilon2)">
-            <label class="form-check-label" for="es_epsilon">
-              Es epsilon
-            </label>
-          </div>
-          <!--Tipo E-->
-          <div class="form-group mx-sm-3 mb-2">
-            <input id="es_tipo_e" class="form-check-input" value="" type="checkbox" (change)="checkE2(!tipoE2)">
-            <label class="form-check-label" for="es_tipo_e">
-              Es tipo E
-            </label>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
-          (click)="cursoForm.reset()">Cancelar</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!cursoForm.valid"
-          (click)="updateCurso(cursoForm.value)">Guardar</button>
+          (click)="reglaForm.reset()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!reglaForm.valid"
+          (click)="updateRegla(reglaForm.value)">Guardar</button>
       </div>
     </div>
   </div>
@@ -255,7 +224,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content" *ngIf="selected">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{selectedCurso.nombre}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{selectedRegla.nombre}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -263,15 +232,13 @@
           <div class="row">
             <div class="col-6">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Código: {{selectedCurso.sigla}}-{{selectedCurso.codigo}}</li>
-                <li class="list-group-item">Créditos: {{selectedCurso.creditos}}</li>
-                <li class="list-group-item">Departamento: {{selectedCurso.sigla}}</li>
+                <li class="list-group-item">Semestre de inicio: {{splitNum1(selectedRegla.semestre_inicio)}}-{{splitNum2(selectedRegla.semestre_inicio)}}</li>
+                <li class="list-group-item">Creditos: {{selectedRegla.creditos}}</li>
               </ul>
             </div>
             <div class="col-6">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Tipo Epsilon: {{selectedCurso.es_epsilon}}</li>
-                <li class="list-group-item">Tipo E: {{selectedCurso.es_tipo_e}}</li>
+                <li class="list-group-item">Semestre de vigencia: {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
               </ul>
             </div>
           </div>

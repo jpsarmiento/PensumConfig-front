@@ -9,6 +9,7 @@ import { HttpErrorInterceptorService } from './interceptors/HttpErrorInterceptor
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ReglaModule } from './regla/regla.module';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,10 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     CursoModule,
+    ReglaModule,
     HttpClientModule,
     ToastrModule.forRoot({timeOut: 5000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-center-center',
       preventDuplicates: true}),
     BrowserAnimationsModule
   ],

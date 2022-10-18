@@ -13,7 +13,6 @@ export class CursoComponent implements OnInit {
 
   cursos: Array<Curso> = [];
   selected: Boolean = false;
-  cursoNull! : Curso;
   selectedCurso!: Curso;
   cursoForm! : FormGroup;
   epsilon: Boolean = false;
@@ -39,10 +38,6 @@ export class CursoComponent implements OnInit {
   deleteCurso(curso: Curso) {
     this.cursoService.deleteCurso(curso.id).subscribe(response => {
       this.cursos = this.cursos.filter(item => item.id != curso.id);
-      if(curso == this.selectedCurso) {
-        this.selectedCurso = this.cursoNull;
-        this.selected = false;
-      }
     })
   }
 
@@ -64,7 +59,7 @@ export class CursoComponent implements OnInit {
 
   formularioModificar() {
     this.cursoForm = this.formBuilder.group({
-      nombre: [this.selectedCurso.nombre, [Validators.required, Validators.minLength(2)]],
+      nombre: [this.selectedCurso.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       sigla: [this.selectedCurso.sigla, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       codigo: [this.selectedCurso.codigo, [Validators.required, Validators.min(1000), Validators.max(7000)]],
       creditos: [this.selectedCurso.creditos, [Validators.required, Validators.min(0)]],
@@ -75,7 +70,7 @@ export class CursoComponent implements OnInit {
 
   formularioCrear() {
     this.cursoForm = this.formBuilder.group({
-      nombre: ["", [Validators.required, Validators.minLength(2)]],
+      nombre: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       sigla: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       codigo: ["", [Validators.required, Validators.min(1000), Validators.max(7000)]],
       creditos: ["", [Validators.required, Validators.min(0)]],
