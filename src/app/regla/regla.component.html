@@ -1,10 +1,16 @@
 <!-- Titulo y agregar -->
 <div class="container-fluid mt-4">
   <div class="row">
-    <div class="col-11">
+    <div class="col-9">
       <h3> Reglas existentes: </h3>
     </div>
-    <div class="col">
+    <div class="col-2">
+      <div class="input-group rounded">
+        <input type="search" id="filtro" class="form-control rounded" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-secondary" (click)="filtrar()">🔍︎</button>
+      </div>
+    </div>
+    <div class="col-1">
       <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
         (click)="formularioCrear()">Agregar</button>
     </div>
@@ -98,17 +104,17 @@
           </div>
           <!--Creditos-->
           <div class="form-group mx-sm-3 mb-2">
-            <label for="creditos">Creditos</label>
+            <label for="creditos">Créditos</label>
             <input novalidate id="creditos" class="form-control" formControlName="creditos"
               placeholder="Creditos de la regla" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               reglaForm.get('creditos')!.hasError('required') &&
               reglaForm.get('creditos')!.touched">
-              Creditos requeridos
+              Créditos requeridos
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
               *ngIf="reglaForm.get('creditos')!.hasError('min')">
-              Los creditos deben ser un numero positivo
+              Los créditos deben ser un numero positivo
             </div>
           </div>
         </form>
@@ -192,7 +198,7 @@
           </div>
           <!--Creditos-->
           <div class="form-group mx-sm-3 mb-2">
-            <label for="creditos">Creditos</label>
+            <label for="creditos">Créditos</label>
             <input novalidate id="creditos" class="form-control" formControlName="creditos"
               placeholder="Creditos de la regla" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
@@ -233,13 +239,18 @@
             <div class="col-6">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Semestre de inicio: {{splitNum1(selectedRegla.semestre_inicio)}}-{{splitNum2(selectedRegla.semestre_inicio)}}</li>
-                <li class="list-group-item">Creditos: {{selectedRegla.creditos}}</li>
+                <li class="list-group-item">Créditos: {{selectedRegla.creditos}}</li>
+                <li class="list-group-item">Semestre de vigencia: {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
               </ul>
             </div>
             <div class="col-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Semestre de vigencia: {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
-              </ul>
+              <div class="row">
+                <p>Terminos:</p>
+              </div>
+              <div *ngFor="let termino of terminos">
+                  <p >{{termino.id}}</p>
+                  <p *ngFor="let curso of termino.cursos">{{curso.sigla}}-{{curso.codigo}}</p>
+              </div>
             </div>
           </div>
         </div>

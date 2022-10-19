@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Regla } from './regla';
+import { Curso } from '../curso/curso';
 import { ReglaService } from './regla.service';
 import { ToastrService } from 'ngx-toastr';
+import { Termino } from '../termino';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-regla',
@@ -11,10 +14,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ReglaComponent implements OnInit {
 
+  allReglas: Array<Regla> = [];
   reglas: Array<Regla> = [];
   selected: Boolean = false;
   selectedRegla!: Regla;
   reglaForm! : FormGroup;
+  terminos: Array<Termino> = [];
+  selectedTermino!: Termino;
 
   constructor(
     private reglaService: ReglaService,
@@ -30,6 +36,22 @@ export class ReglaComponent implements OnInit {
   onSelected(regla: Regla): void {
     this.selected = true;
     this.selectedRegla = regla;
+    this.getTerminos(regla)
+    this.terminos.forEach(termino => {
+      this.getTerminoCursos(termino);
+      termino = this.selectedTermino;
+    });
+  }
+
+  getTerminoCursos(termino: Termino): void {
+    this.reglaService.getTermino(termino.id).subscribe({ next: term =>
+      this.selectedTermino = term
+    })
+  }
+
+  getTerminos(regla: Regla): void {
+    this.reglaService.getTerminos(regla.id).subscribe({ next: terms =>
+      this.terminos = terms})
   }
 
   deleteRegla(regla: Regla) {
@@ -93,6 +115,18 @@ export class ReglaComponent implements OnInit {
   splitNum2(num: number) {
     const arreglo = Array.from(num.toString()).map(Number)
     return ""+arreglo[4]+arreglo[5]
+  }
+
+  filtrar() {
+    if(this.allReglas.length==0 && this.reglas.length != 0)
+      this.allReglas = this.reglas;
+
+    this.reglas = this.allReglas;
+    const filtro = document.getElementById('filtro') as HTMLInputElement;
+    const value = filtro.value
+
+    if (value.length != 0)
+      this.reglas =  this.reglas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
   }
 
 }

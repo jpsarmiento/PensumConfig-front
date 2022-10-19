@@ -7,9 +7,9 @@ export class Regla {
   semestre_inicio: number;
   semestre_vigencia: number;
   creditos: number;
-  terminos: Termino[];
+  terminos: Array<Termino> = [];
 
-  public constructor(id: string, nombre: string, semestre_inicio: number, creditos: number, semestre_vigencia: number, terminos: Termino[]) {
+  public constructor(id: string, nombre: string, semestre_inicio: number, creditos: number, semestre_vigencia: number, terminos:  Array<Termino>) {
     this.id = id;
     this.nombre = nombre;
     this.semestre_inicio = semestre_inicio;

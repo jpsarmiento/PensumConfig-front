@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Regla } from './regla';
+import { Termino } from '../termino';
+import { Curso } from '../curso/curso';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +26,23 @@ export class ReglaService {
     return this.http.delete(this.apiUrl+'/'+id)
   }
 
-  createRegla(curso: Regla): Observable<Regla> {
-    return this.http.post<Regla>(this.apiUrl, curso);
+  createRegla(regla: Regla): Observable<Regla> {
+    return this.http.post<Regla>(this.apiUrl, regla);
  }
 
-  updateRegla(id: string, curso: Regla): Observable<Regla> {
-    return this.http.put<Regla>(this.apiUrl+"/"+id, curso);
+  updateRegla(id: string, regla: Regla): Observable<Regla> {
+    return this.http.put<Regla>(this.apiUrl+"/"+id, regla);
   }
 
+  getTerminos(id: string): Observable<Termino[]> {
+    return this.http.get<Termino[]>(this.apiUrl+'/'+id+'/terminos')
+  }
+
+  getCursos(id: string): Observable<Curso[]> {
+    return this.http.get<Curso[]>(environment.baseUrl+'terminos/'+id+'/cursos')
+  }
+
+  getTermino(id: string): Observable<Termino> {
+    return this.http.get<Termino>(environment.baseUrl+'terminos/'+id)
+  }
 }

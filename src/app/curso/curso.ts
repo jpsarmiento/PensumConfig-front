@@ -8,9 +8,9 @@ export class Curso {
   creditos: number;
   es_epsilon: Boolean;
   es_tipo_e: Boolean;
-  terminos: Termino[]
+  terminos: Array<Termino> = []
 
-  public constructor(id: string, nombre: string, sigla: string, codigo: number, creditos: number, es_epsilon: boolean, es_tipo_e: boolean, terminos: Termino[]) {
+  public constructor(id: string, nombre: string, sigla: string, codigo: number, creditos: number, es_epsilon: boolean, es_tipo_e: boolean, terminos:  Array<Termino>) {
     this.id = id;
     this.nombre = nombre;
     this.sigla = sigla;
