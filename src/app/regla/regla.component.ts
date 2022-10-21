@@ -129,4 +129,12 @@ export class ReglaComponent implements OnInit {
       this.reglas =  this.reglas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
   }
 
+  getCursosTexto(termino: Termino): string {
+    var rta = ""
+    termino.cursos.forEach(function(curso) {
+      rta += curso.sigla+'-'+curso.codigo+', '
+    })
+    return rta.slice(0,-2)
+  }
+
 }

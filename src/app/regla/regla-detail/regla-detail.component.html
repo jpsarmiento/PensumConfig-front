@@ -1,12 +1,43 @@
 <div class="container-fluid">
   <p class="h3 p-3">{{ reglaDetail.nombre }}</p>
   <div class="row">
+    <div class="col-2">
+      <div class="thumb">
+        <img class="img-fluid"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/University_of_Los_Andes_logo.svg/1200px-University_of_Los_Andes_logo.svg.png"
+          alt="Logo Universidad de los Andes" />
+      </div>
+    </div>
     <div class="col">
       <dl>
-        <dt>Cursos</dt>
-        <dd>No available information</dd>
+        <div class="row">
+          <div class="col-4">
+            <dt>Terminos</dt>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addterm">➕</button>
+          </div>
+        </div>
+
+        <div class="row" *ngFor="let termino of terminos">
+          <div class="col-4">
+          <dd>
+            {{getCursosTexto(termino)}}
+           </dd>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteTermino(termino)">🗑️</button>
+          </div>
+        </div>
+
+
+
+
         <hr />
-        <dt>Semestre de inicio:</dt>
+        <dt>Examenes</dt>
+        <dd>No informacion</dd>
+        <hr />
+        <dt>Semestre de inicio</dt>
         <dd>{{ reglaDetail.semestre_inicio }}</dd>
         <hr />
         <dt>Semestre de vigencia</dt>
@@ -14,7 +45,8 @@
         <hr />
         <dt>Creditos</dt>
         <dd>{{ reglaDetail.creditos }}</dd>
+        <div ngfor></div>
       </dl>
     </div>
   </div>
- </div>
+</div>

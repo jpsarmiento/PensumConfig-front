@@ -6,7 +6,8 @@
     </div>
     <div class="col-2">
       <div class="input-group rounded">
-        <input type="search" id="filtro" class="form-control rounded" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="search-addon" />
+        <input type="search" id="filtro" class="form-control rounded" placeholder="Búsqueda" aria-label="Busqueda"
+          aria-describedby="search-addon" />
         <button type="button" class="btn btn-outline-secondary" (click)="filtrar()">🔍︎</button>
       </div>
     </div>
@@ -26,7 +27,7 @@
         <div class="col-2 mt-2" *ngFor="let c of reglas">
           <div class="card text-center">
             <div class="card-body">
-              <h5 class="card-title">{{c.nombre}}</h5>
+              <h5 class="card-title"><a routerLink="/reglas/{{ c.id }}/detalle">{{c.nombre}}</a></h5>
               <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
                 data-bs-target="#detalleModal" (click)="onSelected(c)">Ver detalle</button>
               <button type="button" class="btn btn-outline-danger" (click)="deleteRegla(c)">Eliminar</button>
@@ -35,8 +36,10 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-<!-- Modal Form -->
+<!-- Modal Form 1 -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -49,7 +52,8 @@
           <!--Nombre-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="nombre">Nombre</label>
-            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre de la regla"/>
+            <input novalidate id="nombre" class="form-control" formControlName="nombre"
+              placeholder="Nombre de la regla" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               reglaForm.get('nombre')!.hasError('required') &&
               reglaForm.get('nombre')!.touched">
@@ -67,8 +71,8 @@
           <!--Sem inicio-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="semestre_inicio">Semestre de inicio</label>
-            <input novalidate id="semestre_inicio" class="form-control" formControlName="semestre_inicio" placeholder="Semestre de inicio"
-              type="number" />
+            <input novalidate id="semestre_inicio" class="form-control" formControlName="semestre_inicio"
+              placeholder="Semestre de inicio" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               reglaForm.get('semestre_inicio')!.hasError('required') &&
               reglaForm.get('semestre_inicio')!.touched ">
@@ -86,8 +90,8 @@
           <!--Sem inicio-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="semestre_vigencia">Semestre de vigencia</label>
-            <input novalidate id="semestre_vigencia" class="form-control" formControlName="semestre_vigencia" placeholder="Semestre de vigencia"
-              type="number" />
+            <input novalidate id="semestre_vigencia" class="form-control" formControlName="semestre_vigencia"
+              placeholder="Semestre de vigencia" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               reglaForm.get('semestre_vigencia')!.hasError('required') &&
               reglaForm.get('semestre_vigencia')!.touched ">
@@ -143,7 +147,8 @@
           <!--Nombre-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="nombre">Nombre</label>
-            <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre de la regla"/>
+            <input novalidate id="nombre" class="form-control" formControlName="nombre"
+              placeholder="Nombre de la regla" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               reglaForm.get('nombre')!.hasError('required') &&
               reglaForm.get('nombre')!.touched">
@@ -161,8 +166,8 @@
           <!--Sem inicio-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="semestre_inicio">Semestre de inicio</label>
-            <input novalidate id="semestre_inicio" class="form-control" formControlName="semestre_inicio" placeholder="Semestre de inicio"
-              type="number" />
+            <input novalidate id="semestre_inicio" class="form-control" formControlName="semestre_inicio"
+              placeholder="Semestre de inicio" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               reglaForm.get('semestre_inicio')!.hasError('required') &&
               reglaForm.get('semestre_inicio')!.touched ">
@@ -180,8 +185,8 @@
           <!--Sem inicio-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="semestre_vigencia">Semestre de vigencia</label>
-            <input novalidate id="semestre_vigencia" class="form-control" formControlName="semestre_vigencia" placeholder="Semestre de vigencia"
-              type="number" />
+            <input novalidate id="semestre_vigencia" class="form-control" formControlName="semestre_vigencia"
+              placeholder="Semestre de vigencia" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               reglaForm.get('semestre_vigencia')!.hasError('required') &&
               reglaForm.get('semestre_vigencia')!.touched ">
@@ -238,19 +243,18 @@
           <div class="row">
             <div class="col-6">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Semestre de inicio: {{splitNum1(selectedRegla.semestre_inicio)}}-{{splitNum2(selectedRegla.semestre_inicio)}}</li>
+                <li class="list-group-item">Semestre de inicio:
+                  {{splitNum1(selectedRegla.semestre_inicio)}}-{{splitNum2(selectedRegla.semestre_inicio)}}</li>
                 <li class="list-group-item">Créditos: {{selectedRegla.creditos}}</li>
-                <li class="list-group-item">Semestre de vigencia: {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
+                <li class="list-group-item">Semestre de vigencia:
+                  {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
               </ul>
             </div>
             <div class="col-6">
-              <div class="row">
-                <p>Terminos:</p>
-              </div>
-              <div *ngFor="let termino of terminos">
-                  <p >{{termino.id}}</p>
-                  <p *ngFor="let curso of termino.cursos">{{curso.sigla}}-{{curso.codigo}}</p>
-              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Terminos:</li>
+                <li class="list-group-item" *ngFor="let termino of terminos">{{getCursosTexto(termino)}}</li>
+              </ul>
             </div>
           </div>
         </div>

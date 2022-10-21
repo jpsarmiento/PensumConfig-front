@@ -45,4 +45,20 @@ export class ReglaService {
   getTermino(id: string): Observable<Termino> {
     return this.http.get<Termino>(environment.baseUrl+'terminos/'+id)
   }
+
+  deleteTerminoRegla(reglaid: string, terminoid: string) {
+    return this.http.delete(this.apiUrl+'/'+reglaid+'/terminos/'+terminoid)
+  }
+
+  createTermino(termino: Termino):Observable<Termino> {
+    return this.http.post<Termino>(environment.baseUrl+'terminos', termino);
+ }
+
+ addCursoTermino(terminoid: string, cursoid: string): Observable<Termino> {
+  return this.http.post<Termino>(environment.baseUrl+'terminos/'+terminoid+'/cursos/'+cursoid, null)
+ }
+
+ addTerminoRegla(reglaid: string, terminoid: string) : Observable<Regla>{
+  return this.http.post<Regla>(this.apiUrl+'/'+reglaid+'/terminos/'+terminoid, null)
+ }
 }
