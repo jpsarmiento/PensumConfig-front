@@ -39,11 +39,20 @@ export class ReglaDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.reglaDetail === undefined){
       this.reglaId = this.route.snapshot.paramMap.get('id')!
       if (this.reglaId)
         this.getRegla();
-      }
+
+  }
+
+  splitNum1(num: number) {
+    const arreglo = Array.from(num.toString()).map(Number)
+    return ""+  arreglo[0]+arreglo[1]+arreglo[2]+arreglo[3]
+  }
+
+  splitNum2(num: number) {
+    const arreglo = Array.from(num.toString()).map(Number)
+    return ""+arreglo[4]+arreglo[5]
   }
 
   getCursosTexto(termino: Termino): string {

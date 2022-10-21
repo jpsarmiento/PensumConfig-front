@@ -13,7 +13,8 @@ import { Regla } from '../regla';
 })
 export class AddTerminoComponent implements OnInit {
 
-  @Input() regla!: Regla;
+  reglaId!: string;
+  @Input() reglaDetail!: Regla;
   termino!: Termino;
   cursos: Array<Curso> = [];
   allCursos:  Array<Curso> = [];
@@ -22,6 +23,12 @@ export class AddTerminoComponent implements OnInit {
     private route: ActivatedRoute,
     private reglaService: ReglaService,
     private cursoService: CursoService) { }
+
+    getRegla(){
+      this.reglaService.getRegla(this.reglaId).subscribe(regla=>{
+        this.reglaDetail = regla;
+      })
+    }
 
     getCursos(): void {
       this.cursoService.getCursos().subscribe({next: cursos =>
@@ -50,8 +57,8 @@ export class AddTerminoComponent implements OnInit {
     }
 
     addTerminoRegla(termino: Termino) {
-      this.reglaService.addTerminoRegla(this.regla.id, termino.id).subscribe(regla =>{
-        this.regla = regla
+      this.reglaService.addTerminoRegla(this.reglaDetail.id, termino.id).subscribe(regla =>{
+        this.reglaDetail = regla
       })
     }
 
@@ -62,6 +69,13 @@ export class AddTerminoComponent implements OnInit {
     }
 
   ngOnInit() {
+
+    if(this.reglaDetail === undefined){
+      this.reglaId = this.route.snapshot.paramMap.get('id')!
+      if (this.reglaId)
+        this.getRegla();
+      }
+
     this.getCursos();
     this.crearTermino(this.termino)
   }

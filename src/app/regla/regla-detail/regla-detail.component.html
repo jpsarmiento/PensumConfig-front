@@ -12,10 +12,10 @@
       <dl>
         <div class="row">
           <div class="col-4">
-            <dt>Terminos</dt>
+            <dt>Términos</dt>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addterm">➕</button>
+            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addterm">Nuevo</button>
           </div>
         </div>
 
@@ -26,7 +26,7 @@
            </dd>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteTermino(termino)">🗑️</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteTermino(termino)">Quitar</button>
           </div>
         </div>
 
@@ -34,16 +34,16 @@
 
 
         <hr />
-        <dt>Examenes</dt>
+        <dt>Exámenes</dt>
         <dd>No informacion</dd>
         <hr />
         <dt>Semestre de inicio</dt>
-        <dd>{{ reglaDetail.semestre_inicio }}</dd>
+        <dd> {{splitNum1(reglaDetail.semestre_inicio)}}-{{splitNum2(reglaDetail.semestre_inicio)}}</dd>
         <hr />
         <dt>Semestre de vigencia</dt>
-        <dd>{{ reglaDetail.semestre_vigencia }}</dd>
+        <dd>{{splitNum1(reglaDetail.semestre_vigencia)}}-{{splitNum2(reglaDetail.semestre_vigencia)}}</dd>
         <hr />
-        <dt>Creditos</dt>
+        <dt>Créditos</dt>
         <dd>{{ reglaDetail.creditos }}</dd>
         <div ngfor></div>
       </dl>
