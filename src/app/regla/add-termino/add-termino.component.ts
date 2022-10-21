@@ -5,6 +5,7 @@ import { Termino } from '../../termino';
 import { Curso } from '../../curso/curso';
 import { ReglaService } from '../regla.service';
 import { Regla } from '../regla';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-termino',
@@ -22,7 +23,8 @@ export class AddTerminoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private reglaService: ReglaService,
-    private cursoService: CursoService) { }
+    private cursoService: CursoService,
+    private toastr: ToastrService) { }
 
     getRegla(){
       this.reglaService.getRegla(this.reglaId).subscribe(regla=>{
@@ -57,9 +59,15 @@ export class AddTerminoComponent implements OnInit {
     }
 
     addTerminoRegla(termino: Termino) {
+      if (termino.cursos != undefined) {
       this.reglaService.addTerminoRegla(this.reglaDetail.id, termino.id).subscribe(regla =>{
         this.reglaDetail = regla
+        this.toastr.success("Los cursos fueron agregados", "Regla actualizada")
       })
+    }
+    else {
+      this.toastr.error("No ha seleccionado ningún curso para agregar a la regla", "Error")
+    }
     }
 
     crearTermino(termino: Termino) {

@@ -1,0 +1,185 @@
+<!-- Titulo y agregar -->
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-9">
+      <h3> Examenes existentes: </h3>
+    </div>
+
+    <div class="col-2">
+      <div class="input-group rounded">
+        <input type="search" id="filtro" class="form-control rounded" placeholder="Búsqueda" aria-label="Busqueda" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-secondary" (click)="filtrar()">🔍︎</button>
+      </div>
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        (click)="formularioCrear()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Lista de cursos -->
+    <div class="col">
+      <div class="row">
+        <div class="col-2 mt-2" *ngFor="let c of examenes">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{c.nombre}}</h5>
+              <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
+                data-bs-target="#detalleModal" (click)="onSelected(c)">Ver detalle</button>
+              <button type="button" class="btn btn-outline-danger" (click)="deleteExamen(c)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Crear un nuevo curso</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="examenForm" (ngSubmit)="!examenForm.invalid">
+              <!--Nombre-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="nombre">Nombre</label>
+                <input novalidate id="nombre" class="form-control" formControlName="nombre"
+                  placeholder="Nombre del examen"/>
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                examenForm.get('nombre')!.hasError('required') &&
+                examenForm.get('nombre')!.touched">
+                  Nombre requerido
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="examenForm.get('nombre')!.hasError('minlength')">
+                  Nombre muy corto
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="examenForm.get('nombre')!.hasError('maxlength')">
+                  Nombre muy largo
+                </div>
+              </div>
+              <!--Creditos-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="min_nota">Nota mínima</label>
+                <input novalidate id="min_nota" class="form-control" formControlName="min_nota"
+                  placeholder="Nota mínima para aprobar" type="number" />
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                examenForm.get('min_nota')!.hasError('required') &&
+                examenForm.get('min_nota')!.touched">
+                  Nota mínima requerida
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="examenForm.get('min_nota')!.hasError('min')">
+                  La nota mínima debe ser positiva
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+              (click)="examenForm.reset()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!examenForm.valid"
+              (click)="createExamen(examenForm.value)">Crear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form 2 -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="myModalLabel">Editar examen</h1>
+            <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#detalleModal"
+              aria-label="Close" (click)="examenForm.reset()"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="examenForm" (ngSubmit)="!examenForm.invalid">
+              <!--Nombre-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="nombre">Nombre</label>
+                <input novalidate id="nombre" class="form-control" formControlName="nombre"
+                  placeholder="Nombre del examen"/>
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                examenForm.get('nombre')!.hasError('required') &&
+                examenForm.get('nombre')!.touched">
+                  Nombre requerido
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="examenForm.get('nombre')!.hasError('minlength')">
+                  Nombre muy corto
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="examenForm.get('nombre')!.hasError('maxlength')">
+                  Nombre muy largo
+                </div>
+              </div>
+              <!--Creditos-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="min_nota">Nota mínima</label>
+                <input novalidate id="min_nota" class="form-control" formControlName="min_nota"
+                  placeholder="Nota mínima para aprobar" type="number" />
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                examenForm.get('min_nota')!.hasError('required') &&
+                examenForm.get('min_nota')!.touched">
+                  Nota mínima requerida
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="examenForm.get('min_nota')!.hasError('min')">
+                  La nota mínima debe ser positiva
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
+              (click)="examenForm.reset()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!examenForm.valid"
+              (click)="updateExamen(examenForm.value)">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form 3 -->
+    <div class="modal fade bd-example-modal-sm" id="detalleModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" *ngIf="selected">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{selectedExamen.nombre}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-6">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Nota mínima: {{selectedExamen.min_nota}}</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Regla: {{selectedExamen.regla.nombre}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+              (click)="formularioModificar()">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>

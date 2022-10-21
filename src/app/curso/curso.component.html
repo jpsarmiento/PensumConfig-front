@@ -51,7 +51,7 @@
               <div class="form-group mx-sm-3 mb-2">
                 <label for="nombre">Nombre</label>
                 <input novalidate id="nombre" class="form-control" formControlName="nombre"
-                  placeholder="Nombre del curso" value="HOLA" />
+                  placeholder="Nombre del curso"/>
                 <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               cursoForm.get('nombre')!.hasError('required') &&
               cursoForm.get('nombre')!.touched">

@@ -3,6 +3,7 @@ import { Regla } from '../regla';
 import { ReglaService } from '../regla.service';
 import { ActivatedRoute } from '@angular/router';
 import { Termino } from 'src/app/termino';
+import { Examen } from 'src/app/examen/examen';
 
 @Component({
   selector: 'app-regla-detail',
@@ -14,6 +15,7 @@ export class ReglaDetailComponent implements OnInit {
   reglaId!: string;
   @Input() reglaDetail!: Regla;
   terminos: Array<Termino> = [];
+  examenes: Array<Examen> = []
 
   constructor(
    private route: ActivatedRoute,
@@ -24,6 +26,7 @@ export class ReglaDetailComponent implements OnInit {
     this.reglaService.getRegla(this.reglaId).subscribe(regla=>{
       this.reglaDetail = regla;
       this.getTerminos(regla);
+      this.getExamenes(regla);
     })
   }
 
@@ -32,9 +35,20 @@ export class ReglaDetailComponent implements OnInit {
       this.terminos = terms})
   }
 
+  getExamenes(regla: Regla): void {
+    this.reglaService.getExamenes(regla.id).subscribe({ next: examenes =>
+      this.examenes = examenes})
+  }
+
   deleteTermino(termino: Termino) {
     this.reglaService.deleteTerminoRegla(this.reglaDetail.id, termino.id).subscribe(response => {
       this.terminos = this.terminos.filter(item => item.id != termino.id)
+    })
+  }
+
+  deleteExamen(examen: Examen) {
+    this.reglaService.deleteExamenRegla(this.reglaDetail.id, examen.id).subscribe(response => {
+      this.examenes = this.examenes.filter(item => item.id != examen.id)
     })
   }
 
@@ -60,10 +74,6 @@ export class ReglaDetailComponent implements OnInit {
     termino.cursos.forEach(function(curso) {
       rta += curso.sigla+'-'+curso.codigo+', '
     })
-    console.log(rta);
     return rta.slice(0,-2)
   }
-
-
-
 }

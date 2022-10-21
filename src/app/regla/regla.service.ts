@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Regla } from './regla';
 import { Termino } from '../termino';
 import { Curso } from '../curso/curso';
+import { Examen } from '../examen/examen';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,10 @@ export class ReglaService {
     return this.http.get<Termino[]>(this.apiUrl+'/'+id+'/terminos')
   }
 
+  getExamenes(id: string): Observable<Examen[]> {
+    return this.http.get<Examen[]>(this.apiUrl+'/'+id+'/examenes')
+  }
+
   getCursos(id: string): Observable<Curso[]> {
     return this.http.get<Curso[]>(environment.baseUrl+'terminos/'+id+'/cursos')
   }
@@ -61,4 +66,12 @@ export class ReglaService {
  addTerminoRegla(reglaid: string, terminoid: string) : Observable<Regla>{
   return this.http.post<Regla>(this.apiUrl+'/'+reglaid+'/terminos/'+terminoid, null)
  }
+
+ addExamenRegla(reglaid: string, examenid: string) : Observable<Regla>{
+  return this.http.post<Regla>(this.apiUrl+'/'+reglaid+'/examenes/'+examenid, null)
+ }
+
+ deleteExamenRegla(reglaid: string, examenid: string) {
+  return this.http.delete(this.apiUrl+'/'+reglaid+'/examenes/'+examenid)
+}
 }

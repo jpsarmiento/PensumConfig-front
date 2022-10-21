@@ -30,13 +30,30 @@
           </div>
         </div>
 
+        <hr />
 
+        <div class="row">
+          <div class="col-4">
+            <dt>Exámenes</dt>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addexamen">Nuevo</button>
+          </div>
+        </div>
 
+        <div class="row" *ngFor="let examen of examenes">
+          <div class="col-4">
+          <dd>
+            {{examen.nombre}}
+           </dd>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteExamen(examen)">Quitar</button>
+          </div>
+        </div>
 
         <hr />
-        <dt>Exámenes</dt>
-        <dd>No informacion</dd>
-        <hr />
+
         <dt>Semestre de inicio</dt>
         <dd> {{splitNum1(reglaDetail.semestre_inicio)}}-{{splitNum2(reglaDetail.semestre_inicio)}}</dd>
         <hr />

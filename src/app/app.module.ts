@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReglaModule } from './regla/regla.module';
+import { ExamenModule } from './examen/examen.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ReglaModule } from './regla/regla.module';
     AppRoutingModule,
     CursoModule,
     ReglaModule,
+    ExamenModule,
     HttpClientModule,
     ToastrModule.forRoot({timeOut: 5000,
       positionClass: 'toast-center-center',

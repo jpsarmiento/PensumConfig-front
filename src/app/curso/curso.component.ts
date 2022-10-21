@@ -82,7 +82,6 @@ export class CursoComponent implements OnInit {
     })
   }
 
-
   createCurso(curso: Curso) {
     curso.sigla = curso.sigla.toUpperCase();
     curso.es_epsilon = this.epsilon;
