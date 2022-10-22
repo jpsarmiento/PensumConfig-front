@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReglaModule } from './regla/regla.module';
 import { ExamenModule } from './examen/examen.module';
+import { AreaModule } from './area/area.module';
+import { ProgramaModule } from './programa/programa.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ExamenModule } from './examen/examen.module';
     CursoModule,
     ReglaModule,
     ExamenModule,
+    AreaModule,
+    ProgramaModule,
     HttpClientModule,
     ToastrModule.forRoot({timeOut: 5000,
       positionClass: 'toast-center-center',

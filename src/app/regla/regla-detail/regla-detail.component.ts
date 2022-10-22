@@ -4,6 +4,8 @@ import { ReglaService } from '../regla.service';
 import { ActivatedRoute } from '@angular/router';
 import { Termino } from 'src/app/termino';
 import { Examen } from 'src/app/examen/examen';
+import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-regla-detail',
@@ -15,11 +17,14 @@ export class ReglaDetailComponent implements OnInit {
   reglaId!: string;
   @Input() reglaDetail!: Regla;
   terminos: Array<Termino> = [];
-  examenes: Array<Examen> = []
+  examenes: Array<Examen> = [];
+  reglaForm! : FormGroup;
 
   constructor(
    private route: ActivatedRoute,
-   private reglaService: ReglaService
+   private reglaService: ReglaService,
+   private formBuilder: FormBuilder,
+   private toastr: ToastrService
   ) { }
 
   getRegla(){
@@ -49,6 +54,22 @@ export class ReglaDetailComponent implements OnInit {
   deleteExamen(examen: Examen) {
     this.reglaService.deleteExamenRegla(this.reglaDetail.id, examen.id).subscribe(response => {
       this.examenes = this.examenes.filter(item => item.id != examen.id)
+    })
+  }
+
+  formularioModificar() {
+    this.reglaForm = this.formBuilder.group({
+      nombre: [this.reglaDetail.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
+      semestre_inicio: [this.reglaDetail.semestre_inicio, [Validators.required, Validators.min(200000), Validators.max(205002)]],
+      semestre_vigencia: [this.reglaDetail.semestre_vigencia, [Validators.required, Validators.min(200000), Validators.max(205002)]],
+      creditos: [this.reglaDetail.creditos, [Validators.required, Validators.min(0)]]
+    })
+  }
+
+  updateRegla(regla: Regla) {
+    this.reglaService.updateRegla(this.reglaDetail.id, regla).subscribe(regla =>{
+      this.toastr.success(regla.nombre, "Regla actualizada");
+      this.getRegla()
     })
   }
 

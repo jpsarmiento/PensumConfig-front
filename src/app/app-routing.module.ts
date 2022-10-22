@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AreaComponent } from './area/area.component';
 import { CursoComponent } from './curso/curso.component';
 import { ExamenComponent } from './examen/examen.component';
+import { ProgramaComponent } from './programa/programa.component';
 import { AddExamenComponent } from './regla/add-examen/add-examen.component';
 import { AddTerminoComponent } from './regla/add-termino/add-termino.component';
 import { ReglaDetailComponent } from './regla/regla-detail/regla-detail.component';
@@ -15,7 +17,6 @@ const routes: Routes = [
   {
     path: 'examenes', component: ExamenComponent
   },
-
   {
     path: 'reglas',
     children: [
@@ -33,6 +34,47 @@ const routes: Routes = [
           },
           {
             path: 'addexamen', component: AddExamenComponent
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: 'areas',
+    children: [
+      {
+        path: 'lista', component: AreaComponent
+      },
+      {
+        path: ':id',
+        children: [
+          {
+            path: 'detalle', component: ReglaDetailComponent
+          },
+          {
+            path: 'addregla', component: AddTerminoComponent
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: 'programas',
+    children: [
+      {
+        path: 'lista', component: ProgramaComponent
+      },
+      {
+        path: ':id',
+        children: [
+          {
+            path: 'detalle', component: ReglaDetailComponent
+          },
+          {
+            path: 'addarea', component: AddTerminoComponent
+          },
+          {
+            path: 'addrequisito', component: AddTerminoComponent
           }
         ]
       }

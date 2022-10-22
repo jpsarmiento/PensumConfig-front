@@ -221,7 +221,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
           (click)="reglaForm.reset()">Cancelar</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!reglaForm.valid"
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal" [disabled]="!reglaForm.valid"
           (click)="updateRegla(reglaForm.value)">Guardar</button>
       </div>
     </div>
