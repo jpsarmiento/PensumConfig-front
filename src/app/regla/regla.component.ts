@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Regla } from './regla';
-import { Curso } from '../curso/curso';
 import { ReglaService } from './regla.service';
 import { ToastrService } from 'ngx-toastr';
 import { Termino } from '../termino';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-regla',
@@ -57,6 +55,7 @@ export class ReglaComponent implements OnInit {
   deleteRegla(regla: Regla) {
     this.reglaService.deleteRegla(regla.id).subscribe(response => {
       this.reglas = this.reglas.filter(item => item.id != regla.id);
+      this.allReglas = this.allReglas.filter(item => item.id != regla.id);
     })
   }
 
@@ -81,7 +80,7 @@ export class ReglaComponent implements OnInit {
   createRegla(regla: Regla) {
     this.reglaService.createRegla(regla).subscribe(regla =>{
       console.info("La regla fue creada: ", regla)
-      this.toastr.success(regla.nombre, "Regla creado")
+      this.toastr.success(regla.nombre, "Regla creada")
       this.reglaForm.reset();
       this.getReglas()
     })
@@ -98,13 +97,7 @@ export class ReglaComponent implements OnInit {
 
   ngOnInit() {
     this.getReglas();
-
-    this.reglaForm = this.formBuilder.group({
-      nombre: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
-      semestre_inicio: ["", [Validators.required, Validators.min(200000), Validators.max(205002)]],
-      semestre_vigencia: ["", [Validators.required, Validators.min(200000), Validators.max(205002)]],
-      creditos: ["", [Validators.required, Validators.min(0)]]
-    })
+    this.formularioCrear();
   }
 
   splitNum1(num: number) {

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Regla } from '../regla/regla';
+import { ToastrService } from 'ngx-toastr';
+import { Area } from './area';
+import { AreaService } from './area.service';
 
 @Component({
   selector: 'app-area',
@@ -7,9 +12,83 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AreaComponent implements OnInit {
 
-  constructor() { }
+  allAreas: Array<Area> = [];
+  areas: Array<Area> = [];
+  selected: Boolean = false;
+  selectedArea!: Area;
+  areaForm! : FormGroup;
 
-  ngOnInit() {
+  constructor(
+    private areaService: AreaService,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
+  ) { }
+
+  getAreas(): void {
+    this.areaService.getAreas().subscribe({next: areas =>
+    this.areas = areas, error: e => console.error(e)});
   }
 
+  onSelected(area: Area): void {
+    this.selected = true;
+    this.selectedArea = area;
+  }
+
+  deleteArea(area: Area) {
+    this.areaService.deleteArea(area.id).subscribe(response => {
+      this.areas = this.areas.filter(item => item.id != area.id);
+      this.allAreas = this.allAreas.filter(item => item.id != area.id);
+    })
+  }
+
+  formularioModificar() {
+    this.areaForm= this.formBuilder.group({
+      nombre: [this.selectedArea.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
+      prioridad: [this.selectedArea.prioridad, [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      creditos: [this.selectedArea.creditos, [Validators.required, Validators.min(0)]]
+    })
+  }
+
+  formularioCrear() {
+    this.areaForm= this.formBuilder.group({
+      nombre: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
+      prioridad: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      creditos: ["", [Validators.required, Validators.min(0)]]
+    })
+  }
+
+  createArea(area: Area) {
+    this.areaService.createArea(area).subscribe(area =>{
+      console.info("El area fue creada: ", area)
+      this.toastr.success(area.nombre, "Area creada")
+      this.areaForm.reset();
+      this.getAreas()
+    })
+  }
+
+  updateArea(area: Area) {
+    this.areaService.updateArea(this.selectedArea.id, area).subscribe(area =>{
+      console.info("La regla fue actualizada: ", area)
+      this.toastr.success(area.nombre, "Regla actualizada");
+      this.selectedArea = area;
+      this.getAreas();
+    })
+  }
+
+  ngOnInit() {
+    this.getAreas();
+    this.formularioCrear();
+  }
+
+  filtrar() {
+    if(this.allAreas.length==0 && this.areas.length != 0)
+      this.allAreas = this.areas;
+
+    this.areas = this.allAreas;
+    const filtro = document.getElementById('filtro') as HTMLInputElement;
+    const value = filtro.value
+
+    if (value.length != 0)
+      this.areas =  this.areas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+  }
 }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AddReglaComponent } from './area/add-regla/add-regla.component';
+import { AreaDetailComponent } from './area/area-detail/area-detail.component';
 import { AreaComponent } from './area/area.component';
 import { CursoComponent } from './curso/curso.component';
 import { ExamenComponent } from './examen/examen.component';
@@ -49,10 +51,10 @@ const routes: Routes = [
         path: ':id',
         children: [
           {
-            path: 'detalle', component: ReglaDetailComponent
+            path: 'detalle', component: AreaDetailComponent
           },
           {
-            path: 'addregla', component: AddTerminoComponent
+            path: 'addregla', component: AddReglaComponent
           }
         ]
       }

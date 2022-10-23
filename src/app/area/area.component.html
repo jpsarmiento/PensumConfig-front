@@ -1,3 +1,221 @@
-<p>
-  area works!
-</p>
+<!-- Titulo y agregar -->
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-9">
+      <h3> Areas existentes: </h3>
+    </div>
+    <div class="col-2">
+      <div class="input-group rounded">
+        <input type="search" id="filtro" class="form-control rounded" placeholder="Búsqueda" aria-label="Busqueda"
+          aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-secondary" (click)="filtrar()">🔍︎</button>
+      </div>
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        (click)="formularioCrear()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Lista de areas -->
+    <div class="col">
+      <div class="row">
+        <div class="col-2 mt-2" *ngFor="let c of areas">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title"><a routerLink="/areas/{{ c.id }}/detalle">{{c.nombre}}</a></h5>
+              <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
+                data-bs-target="#detalleModal" (click)="onSelected(c)">Ver detalle</button>
+              <button type="button" class="btn btn-outline-danger" (click)="deleteArea(c)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Form 1 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear una nueva area</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="areaForm" (ngSubmit)="!areaForm.invalid">
+          <!--Nombre-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="nombre">Nombre</label>
+            <input novalidate id="nombre" class="form-control" formControlName="nombre"
+              placeholder="Nombre de la regla" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              areaForm.get('nombre')!.hasError('required') &&
+              areaForm.get('nombre')!.touched">
+              Nombre requerido
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('nombre')!.hasError('minlength')">
+              Nombre muy corto
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('nombre')!.hasError('maxlength')">
+              Nombre muy largo
+            </div>
+          </div>
+          <!--Prioridad-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="prioridad">Prioridad</label>
+            <input novalidate id="prioridad" class="form-control" formControlName="prioridad" placeholder="Prioridad" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+            areaForm.get('prioridad')!.hasError('required') &&
+            areaForm.get('prioridad')!.touched">
+              Prioridad requerida
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('prioridad')!.hasError('minlength')">
+              La prioridad debe ser Baja, Media, Alta o Muy alta
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('prioridad')!.hasError('maxlength')">
+              La prioridad debe ser Baja, Media, Alta o Muy alta
+            </div>
+          </div>
+          <!--Creditos-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="creditos">Créditos</label>
+            <input novalidate id="creditos" class="form-control" formControlName="creditos"
+              placeholder="Creditos de la regla" type="number" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              areaForm.get('creditos')!.hasError('required') &&
+              areaForm.get('creditos')!.touched">
+              Créditos requeridos
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('creditos')!.hasError('min')">
+              Los créditos deben ser un numero positivo
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          (click)="areaForm.reset()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!areaForm.valid"
+          (click)="createArea(areaForm.value)">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Form 2 -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="myModalLabel">Editar regla</h1>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#detalleModal" aria-label="Close"
+          (click)="areaForm.reset()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="areaForm" (ngSubmit)="!areaForm.invalid">
+          <!--Nombre-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="nombre">Nombre</label>
+            <input novalidate id="nombre" class="form-control" formControlName="nombre"
+              placeholder="Nombre de la regla" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              areaForm.get('nombre')!.hasError('required') &&
+              areaForm.get('nombre')!.touched">
+              Nombre requerido
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('nombre')!.hasError('minlength')">
+              Nombre muy corto
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('nombre')!.hasError('maxlength')">
+              Nombre muy largo
+            </div>
+          </div>
+          <!--Prioridad-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="prioridad">Prioridad</label>
+            <input novalidate id="prioridad" class="form-control" formControlName="prioridad" placeholder="Prioridad" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+            areaForm.get('prioridad')!.hasError('required') &&
+            areaForm.get('prioridad')!.touched">
+              Prioridad requerida
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('prioridad')!.hasError('minlength')">
+              La prioridad debe ser Baja, Media, Alta o Muy alta
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('prioridad')!.hasError('maxlength')">
+              La prioridad debe ser Baja, Media, Alta o Muy alta
+            </div>
+          </div>
+          <!--Creditos-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="creditos">Créditos</label>
+            <input novalidate id="creditos" class="form-control" formControlName="creditos"
+              placeholder="Creditos de la regla" type="number" />
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              areaForm.get('creditos')!.hasError('required') &&
+              areaForm.get('creditos')!.touched">
+              Créditos requeridos
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+              *ngIf="areaForm.get('creditos')!.hasError('min')">
+              Los créditos deben ser un numero positivo
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
+          (click)="areaForm.reset()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal"
+          [disabled]="!areaForm.valid" (click)="updateArea(areaForm.value)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Form 3 -->
+<div class="modal fade bd-example-modal-sm" id="detalleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="selected">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{selectedArea.nombre}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><span style="font-weight:bold">Prioridad:</span> {{selectedArea.prioridad}}</li>
+              <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedArea.creditos}}</li>
+              <li class="list-group-item"><span style="font-weight:bold">Reglas:</span>
+                <p *ngFor="let regla of selectedArea.reglas" style="margin-bottom:4px">{{regla.nombre}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+          (click)="formularioModificar()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
