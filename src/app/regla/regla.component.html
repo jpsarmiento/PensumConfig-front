@@ -241,21 +241,17 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-6">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Semestre de inicio:
+                <li class="list-group-item "> <span style="font-weight:bold">Semestre de inicio:</span>
                   {{splitNum1(selectedRegla.semestre_inicio)}}-{{splitNum2(selectedRegla.semestre_inicio)}}</li>
-                <li class="list-group-item">Créditos: {{selectedRegla.creditos}}</li>
-                <li class="list-group-item">Semestre de vigencia:
+                <li class="list-group-item"><span style="font-weight:bold">Semestre de vigencia:</span>
                   {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
+                  <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedRegla.creditos}}</li>
+                <li class="list-group-item"><span style="font-weight:bold">Cursos válidos:</span>
+                <p *ngFor="let termino of terminos" style="margin-bottom:4px">{{getCursosTexto(termino)}}</p></li>
+                <li class="list-group-item"><span style="font-weight:bold">Exámenes:</span>
+                <p *ngFor="let examen of selectedRegla.examenes" style="margin-bottom:4px">{{examen.nombre}}</p></li>
               </ul>
-            </div>
-            <div class="col-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cursos válidos:</li>
-                <li class="list-group-item" *ngFor="let termino of terminos">{{getCursosTexto(termino)}}</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>

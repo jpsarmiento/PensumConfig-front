@@ -10,6 +10,19 @@
     </div>
     <div class="col">
       <dl>
+
+        <dt>Semestre de inicio</dt>
+        <dd> {{splitNum1(reglaDetail.semestre_inicio)}}-{{splitNum2(reglaDetail.semestre_inicio)}}</dd>
+        <hr />
+        <dt>Semestre de vigencia</dt>
+        <dd>{{splitNum1(reglaDetail.semestre_vigencia)}}-{{splitNum2(reglaDetail.semestre_vigencia)}}</dd>
+        <hr />
+        <dt>Créditos</dt>
+        <dd>{{ reglaDetail.creditos }}</dd>
+
+
+        <hr />
+
         <div class="row">
           <div class="col-4">
             <dt>Cursos válidos</dt>
@@ -52,16 +65,6 @@
           </div>
         </div>
 
-        <hr />
-
-        <dt>Semestre de inicio</dt>
-        <dd> {{splitNum1(reglaDetail.semestre_inicio)}}-{{splitNum2(reglaDetail.semestre_inicio)}}</dd>
-        <hr />
-        <dt>Semestre de vigencia</dt>
-        <dd>{{splitNum1(reglaDetail.semestre_vigencia)}}-{{splitNum2(reglaDetail.semestre_vigencia)}}</dd>
-        <hr />
-        <dt>Créditos</dt>
-        <dd>{{ reglaDetail.creditos }}</dd>
       </dl>
     </div>
   </div>
