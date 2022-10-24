@@ -59,7 +59,6 @@ export class AreaComponent implements OnInit {
 
   createArea(area: Area) {
     this.areaService.createArea(area).subscribe(area =>{
-      console.info("El area fue creada: ", area)
       this.toastr.success(area.nombre, "Area creada")
       this.areaForm.reset();
       this.getAreas()
@@ -68,7 +67,6 @@ export class AreaComponent implements OnInit {
 
   updateArea(area: Area) {
     this.areaService.updateArea(this.selectedArea.id, area).subscribe(area =>{
-      console.info("La regla fue actualizada: ", area)
       this.toastr.success(area.nombre, "Regla actualizada");
       this.selectedArea = area;
       this.getAreas();

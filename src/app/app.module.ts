@@ -29,7 +29,7 @@ import { ProgramaModule } from './programa/programa.module';
     ProgramaModule,
     HttpClientModule,
     ToastrModule.forRoot({timeOut: 5000,
-      positionClass: 'toast-center-center',
+      positionClass: 'toast-bottom-right',
       preventDuplicates: true}),
     BrowserAnimationsModule
   ],

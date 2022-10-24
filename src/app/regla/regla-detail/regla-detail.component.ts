@@ -82,19 +82,20 @@ export class ReglaDetailComponent implements OnInit {
 
   splitNum1(num: number) {
     const arreglo = Array.from(num.toString()).map(Number)
-    return ""+  arreglo[0]+arreglo[1]+arreglo[2]+arreglo[3]
+    return ''+  arreglo[0]+arreglo[1]+arreglo[2]+arreglo[3]
   }
 
   splitNum2(num: number) {
     const arreglo = Array.from(num.toString()).map(Number)
-    return ""+arreglo[4]+arreglo[5]
+    return ''+arreglo[4]+arreglo[5]
   }
 
   getCursosTexto(termino: Termino): string {
-    var rta = ""
+    var rta = '('
     termino.cursos.forEach(function(curso) {
-      rta += curso.sigla+'-'+curso.codigo+', '
+      rta += curso.sigla+'-'+curso.codigo+' y '
     })
-    return rta.slice(0,-2)
+    rta = rta.slice(0,-3)
+    return rta+')'
   }
 }

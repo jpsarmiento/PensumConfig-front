@@ -79,7 +79,6 @@ export class ReglaComponent implements OnInit {
 
   createRegla(regla: Regla) {
     this.reglaService.createRegla(regla).subscribe(regla =>{
-      console.info("La regla fue creada: ", regla)
       this.toastr.success(regla.nombre, "Regla creada")
       this.reglaForm.reset();
       this.getReglas()
@@ -88,7 +87,6 @@ export class ReglaComponent implements OnInit {
 
   updateRegla(regla: Regla) {
     this.reglaService.updateRegla(this.selectedRegla.id, regla).subscribe(regla =>{
-      console.info("La regla fue actualizada: ", regla)
       this.toastr.success(regla.nombre, "Regla actualizada");
       this.selectedRegla = regla;
       this.getReglas();

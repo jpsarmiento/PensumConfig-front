@@ -55,7 +55,6 @@ export class ExamenComponent implements OnInit {
 
     createExamen(examen: Examen) {
       this.examenService.createExamen(examen).subscribe(examen =>{
-        console.info("El examen fue creado: ", examen)
         this.toastr.success(examen.nombre, "Examen creado")
         this.examenForm.reset();
         this.getExamenes()
@@ -64,7 +63,6 @@ export class ExamenComponent implements OnInit {
 
     updateExamen(examen: Examen) {
       this.examenService.updateExamen(this.selectedExamen.id, examen).subscribe(examen =>{
-        console.info("El examen fue actualizado: ", examen)
         this.toastr.success(examen.nombre, "Examen actualizado");
         this.selectedExamen = examen;
         this.getExamenes();

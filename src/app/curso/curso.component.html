@@ -28,9 +28,10 @@
           <div class="card text-center">
             <div class="card-body">
               <h5 class="card-title">{{c.sigla}}-{{c.codigo}}</h5>
-              <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
-                data-bs-target="#detalleModal" (click)="onSelected(c)">Ver detalle</button>
-              <button type="button" class="btn btn-outline-danger" (click)="deleteCurso(c)">Eliminar</button>
+              <h6 class="card-subtitle mb-2 text-muted">{{c.nombre}}</h6>
+              <button type="button" class="btn btn-outline-primary me-2 btn-sm" data-bs-toggle="modal"
+                data-bs-target="#detalleModal" (click)="onSelected(c)">Detalle</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteCurso(c)">Eliminar</button>
             </div>
           </div>
         </div>
@@ -249,7 +250,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
               (click)="cursoForm.reset()">Cancelar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!cursoForm.valid"
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal" [disabled]="!cursoForm.valid"
               (click)="updateCurso(cursoForm.value)">Guardar</button>
           </div>
         </div>
@@ -269,19 +270,14 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-6">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Código: {{selectedCurso.sigla}}-{{selectedCurso.codigo}}</li>
-                    <li class="list-group-item">Créditos: {{selectedCurso.creditos}}</li>
-                    <li class="list-group-item">Departamento: {{selectedCurso.sigla}}</li>
-                  </ul>
-                </div>
-                <div class="col-6">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Tipo Epsilon: {{selectedCurso.es_epsilon}}</li>
-                    <li class="list-group-item">Tipo E: {{selectedCurso.es_tipo_e}}</li>
-                  </ul>
-                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item "> <span style="font-weight:bold">Código:</span>
+                    {{selectedCurso.sigla}}-{{selectedCurso.codigo}}</li>
+                  <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedCurso.creditos}}</li>
+                  <li class="list-group-item"><span style="font-weight:bold">Departamento:</span> {{selectedCurso.sigla}}</li>
+                  <li class="list-group-item"><span style="font-weight:bold">Tipo Epsilon:</span> {{selectedCurso.es_epsilon}}</li>
+                  <li class="list-group-item"><span style="font-weight:bold">Tipo E:</span> {{selectedCurso.es_tipo_e}}</li>
+                </ul>
               </div>
             </div>
           </div>

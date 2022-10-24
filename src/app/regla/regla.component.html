@@ -27,10 +27,10 @@
         <div class="col-2 mt-2" *ngFor="let c of reglas">
           <div class="card text-center">
             <div class="card-body">
-              <h5 class="card-title"><a routerLink="/reglas/{{ c.id }}/detalle">{{c.nombre}}</a></h5>
-              <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
-                data-bs-target="#detalleModal" (click)="onSelected(c)">Ver detalle</button>
-              <button type="button" class="btn btn-outline-danger" (click)="deleteRegla(c)">Eliminar</button>
+              <h5 class="card-title"><a routerLink="/reglas/{{ c.id }}/detalle"><u>{{c.nombre}}</u></a></h5>
+              <button type="button" class="btn btn-outline-primary me-2 btn-sm" data-bs-toggle="modal"
+                data-bs-target="#detalleModal" (click)="onSelected(c)">Editar</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRegla(c)">Eliminar</button>
             </div>
           </div>
         </div>

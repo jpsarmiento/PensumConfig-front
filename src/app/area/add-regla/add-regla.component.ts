@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AreaService } from '../area.service';
+import { Area } from '../area';
+import { ReglaService } from 'src/app/regla/regla.service';
+import { Regla } from 'src/app/regla/regla';
 
 @Component({
   selector: 'app-add-regla',
@@ -7,9 +13,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddReglaComponent implements OnInit {
 
-  constructor() { }
+  areaId!: string;
+  @Input() areaDetail!: Area;
+  selected: Array<Regla> = [];
+  reglas: Array<Regla> = [];
+  allReglas:  Array<Regla> = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private areaService: AreaService,
+    private reglaService: ReglaService,
+    private toastr: ToastrService) { }
+
+
+    getArea(){
+      this.areaService.getArea(this.areaId).subscribe(area=>{
+        this.areaDetail = area;
+      })
+    }
+
+    getReglas(): void {
+      this.reglaService.getReglas().subscribe({next: reglas =>
+      this.reglas = reglas, error: e => console.error(e)});
+    }
+
+    filtrar() {
+      if(this.allReglas.length==0 && this.reglas.length != 0)
+        this.allReglas= this.reglas;
+
+      this.reglas = this.allReglas;
+      const filtro = document.getElementById('filtro') as HTMLInputElement;
+      const value = filtro.value
+
+      if (value.length != 0)
+        this.reglas =  this.reglas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+    }
+
+    addRegla(regla: Regla) {
+      this.selected.push(regla)
+      this.reglas = this.reglas.filter(item => item.id != regla.id);
+      this.allReglas = this.allReglas.filter(item => item.id != regla.id);
+    }
+
+    addReglaArea(regla: Regla) {
+        this.areaService.addReglaArea(this.areaDetail.id, regla.id).subscribe(area =>{
+          this.areaDetail = area
+        })
+      }
+
+    addReglasArea() {
+      if (this.selected.length != 0) {
+        this.selected.forEach((regla) => {
+          this.addReglaArea(regla)
+        })
+          this.toastr.success("Las reglas fueron agregadas", "Área actualizada")
+        }
+      else {
+        this.toastr.error("No ha seleccionado ninguna regla para agregar al área", "Error")
+      }
+    }
 
   ngOnInit() {
+    if(this.areaDetail === undefined){
+      this.areaId= this.route.snapshot.paramMap.get('id')!
+      if (this.areaId)
+        this.getArea();
+      }
+
+    this.getReglas();
   }
 
 }

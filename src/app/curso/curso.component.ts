@@ -88,7 +88,6 @@ export class CursoComponent implements OnInit {
     curso.es_tipo_e = this.tipoE;
 
     this.cursoService.createCurso(curso).subscribe(curso =>{
-      console.info("El curso fue creado: ", curso)
       this.toastr.success(curso.sigla+"-"+curso.codigo, "Curso creado")
       this.cursoForm.reset();
       this.getCursos()
@@ -100,7 +99,6 @@ export class CursoComponent implements OnInit {
     curso.es_epsilon = this.epsilon2;
     curso.es_tipo_e = this.tipoE2;
     this.cursoService.updateCurso(this.selectedCurso.id, curso).subscribe(curso =>{
-      console.info("El curso fue actualizado: ", curso)
       this.toastr.success(curso.sigla+"-"+curso.codigo, "Curso actualizado");
       this.selectedCurso = curso;
       this.getCursos();

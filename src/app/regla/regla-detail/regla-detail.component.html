@@ -11,13 +11,13 @@
     <div class="col">
       <dl>
 
-        <dt>Semestre de inicio</dt>
+        <dt>Semestre de inicio:</dt>
         <dd> {{splitNum1(reglaDetail.semestre_inicio)}}-{{splitNum2(reglaDetail.semestre_inicio)}}</dd>
         <hr />
-        <dt>Semestre de vigencia</dt>
+        <dt>Semestre de vigencia:</dt>
         <dd>{{splitNum1(reglaDetail.semestre_vigencia)}}-{{splitNum2(reglaDetail.semestre_vigencia)}}</dd>
         <hr />
-        <dt>Créditos</dt>
+        <dt>Créditos:</dt>
         <dd>{{ reglaDetail.creditos }}</dd>
 
 
@@ -25,7 +25,7 @@
 
         <div class="row">
           <div class="col-4">
-            <dt>Cursos válidos</dt>
+            <dt>Cursos válidos:</dt>
           </div>
           <div class="col">
             <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addterm">Nuevo</button>
@@ -34,9 +34,7 @@
 
         <div class="row" *ngFor="let termino of terminos">
           <div class="col-4">
-          <dd>
-            {{getCursosTexto(termino)}}
-           </dd>
+          <dd>{{getCursosTexto(termino)}}</dd>
           </div>
           <div class="col">
             <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteTermino(termino)">Quitar</button>
@@ -47,7 +45,7 @@
 
         <div class="row">
           <div class="col-4">
-            <dt>Exámenes</dt>
+            <dt>Exámenes:</dt>
           </div>
           <div class="col">
             <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addexamen">Nuevo</button>
@@ -56,9 +54,7 @@
 
         <div class="row" *ngFor="let examen of examenes">
           <div class="col-4">
-          <dd>
-            {{examen.nombre}}
-           </dd>
+          <dd>{{examen.nombre}}</dd>
           </div>
           <div class="col">
             <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteExamen(examen)">Quitar</button>
@@ -69,5 +65,3 @@
     </div>
   </div>
 </div>
-
-

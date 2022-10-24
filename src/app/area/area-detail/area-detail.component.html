@@ -1,3 +1,43 @@
-<p>
-  area-detail works!
-</p>
+<div class="container-fluid">
+  <p class="h3 p-3">Área: {{ areaDetail.nombre }}</p>
+  <div class="row">
+    <div class="col-2">
+      <div class="thumb">
+        <img class="img-fluid"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/University_of_Los_Andes_logo.svg/1200px-University_of_Los_Andes_logo.svg.png"
+          alt="Logo Universidad de los Andes" />
+      </div>
+    </div>
+    <div class="col">
+      <dl>
+
+        <dt>Prioridad:</dt>
+        <dd> {{ areaDetail.prioridad }}</dd>
+        <hr />
+        <dt>Créditos:</dt>
+        <dd>{{ areaDetail.creditos }}</dd>
+        <hr />
+        <div class="row">
+          <div class="col-4">
+            <dt>Reglas:</dt>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/areas/{{areaDetail.id}}/addregla">Nueva</button>
+          </div>
+        </div>
+        <div class="row" *ngFor="let regla of reglas">
+          <div class="col-4">
+          <dd routerLink="/reglas/{{regla.id}}/detalle">
+            <u>{{regla.nombre}}</u>
+           </dd>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRegla(regla)">Quitar</button>
+          </div>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+

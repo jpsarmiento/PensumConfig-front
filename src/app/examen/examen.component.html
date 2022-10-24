@@ -2,7 +2,7 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <div class="col-9">
-      <h3> Examenes existentes: </h3>
+      <h3> Exámenes existentes: </h3>
     </div>
 
     <div class="col-2">
@@ -28,9 +28,9 @@
           <div class="card text-center">
             <div class="card-body">
               <h5 class="card-title">{{c.nombre}}</h5>
-              <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
-                data-bs-target="#detalleModal" (click)="onSelected(c)">Ver detalle</button>
-              <button type="button" class="btn btn-outline-danger" (click)="deleteExamen(c)">Eliminar</button>
+              <button type="button" class="btn btn-outline-primary me-2 btn-sm" data-bs-toggle="modal"
+                data-bs-target="#detalleModal" (click)="onSelected(c)">Detalle</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteExamen(c)">Eliminar</button>
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Crear un nuevo curso</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Crear un nuevo examen</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -66,7 +66,7 @@
                   Nombre muy largo
                 </div>
               </div>
-              <!--Creditos-->
+              <!--Nota minima-->
               <div class="form-group mx-sm-3 mb-2">
                 <label for="min_nota">Nota mínima</label>
                 <input novalidate id="min_nota" class="form-control" formControlName="min_nota"
@@ -123,7 +123,7 @@
                   Nombre muy largo
                 </div>
               </div>
-              <!--Creditos-->
+              <!--Nota minima-->
               <div class="form-group mx-sm-3 mb-2">
                 <label for="min_nota">Nota mínima</label>
                 <input novalidate id="min_nota" class="form-control" formControlName="min_nota"
@@ -143,7 +143,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
               (click)="examenForm.reset()">Cancelar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!examenForm.valid"
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal" [disabled]="!examenForm.valid"
               (click)="updateExamen(examenForm.value)">Guardar</button>
           </div>
         </div>
@@ -162,16 +162,10 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-6">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Nota mínima: {{selectedExamen.min_nota}}</li>
-                  </ul>
-                </div>
-                <div class="col-6">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Regla: {{selectedExamen.regla.nombre}}</li>
-                  </ul>
-                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item "> <span style="font-weight:bold">Nota mínima:</span> {{selectedExamen.min_nota}}</li>
+                  <li class="list-group-item" *ngIf="selectedExamen.regla != undefined"><span style="font-weight:bold">Regla:</span> {{selectedExamen.regla.nombre}}</li>
+                </ul>
               </div>
             </div>
           </div>

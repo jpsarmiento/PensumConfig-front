@@ -26,8 +26,8 @@
         <div class="col-2 mt-2" *ngFor="let c of cursos">
           <div class="card text-center">
             <div class="card-body">
-              <h5 class="card-title">{{c.sigla}}-{{c.codigo}}</h5>
-              <button type="button" class="btn btn-outline-primary" (click)="addCursoTermino(c)">Agregar</button>
+              <h5 class="card-title" (click)="addCursoTermino(c)"> <u style="color:#0645AD">{{c.sigla}}-{{c.codigo}}</u></h5>
+              <h6 class="card-subtitle text-muted">{{c.nombre}}</h6>
             </div>
           </div>
         </div>
