@@ -6,11 +6,15 @@ import { AreaDetailComponent } from './area/area-detail/area-detail.component';
 import { AreaComponent } from './area/area.component';
 import { CursoComponent } from './curso/curso.component';
 import { ExamenComponent } from './examen/examen.component';
+import { AddAreaComponent } from './programa/add-area/add-area.component';
+import { AddRequisitoComponent } from './programa/add-requisito/add-requisito.component';
+import { ProgramaDetailComponent } from './programa/programa-detail/programa-detail.component';
 import { ProgramaComponent } from './programa/programa.component';
 import { AddExamenComponent } from './regla/add-examen/add-examen.component';
 import { AddTerminoComponent } from './regla/add-termino/add-termino.component';
 import { ReglaDetailComponent } from './regla/regla-detail/regla-detail.component';
 import { ReglaComponent } from './regla/regla.component';
+import { RequisitoComponent } from './requisito/requisito.component';
 
 const routes: Routes = [
   {
@@ -18,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'examenes', component: ExamenComponent
+  },
+  {
+    path: 'requisitos', component: RequisitoComponent
   },
   {
     path: 'reglas',
@@ -70,13 +77,13 @@ const routes: Routes = [
         path: ':id',
         children: [
           {
-            path: 'detalle', component: ReglaDetailComponent
+            path: 'detalle', component: ProgramaDetailComponent
           },
           {
-            path: 'addarea', component: AddTerminoComponent
+            path: 'addarea', component: AddAreaComponent
           },
           {
-            path: 'addrequisito', component: AddTerminoComponent
+            path: 'addrequisito', component: AddRequisitoComponent
           }
         ]
       }

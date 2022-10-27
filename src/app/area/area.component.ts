@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Regla } from '../regla/regla';
 import { ToastrService } from 'ngx-toastr';
 import { Area } from './area';
 import { AreaService } from './area.service';
@@ -59,7 +58,7 @@ export class AreaComponent implements OnInit {
 
   createArea(area: Area) {
     this.areaService.createArea(area).subscribe(area =>{
-      this.toastr.success(area.nombre, "Area creada")
+      this.toastr.success(area.nombre, "Área creada")
       this.areaForm.reset();
       this.getAreas()
     })
@@ -67,7 +66,7 @@ export class AreaComponent implements OnInit {
 
   updateArea(area: Area) {
     this.areaService.updateArea(this.selectedArea.id, area).subscribe(area =>{
-      this.toastr.success(area.nombre, "Regla actualizada");
+      this.toastr.success(area.nombre, "Área actualizada");
       this.selectedArea = area;
       this.getAreas();
     })

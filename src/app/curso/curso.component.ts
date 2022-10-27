@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Curso } from './curso';
 import { CursoService } from './curso.service';
 import { ToastrService } from 'ngx-toastr';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-curso',
@@ -64,7 +63,8 @@ export class CursoComponent implements OnInit {
     this.cursoForm = this.formBuilder.group({
       nombre: [this.selectedCurso.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       sigla: [this.selectedCurso.sigla, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      codigo: [this.selectedCurso.codigo, [Validators.required, Validators.min(1000), Validators.max(7000)]],
+      codigo: [this.selectedCurso.codigo, [Validators.required, Validators.minLength(4), Validators.maxLength(5)]],
+      departamento: [this.selectedCurso.sigla, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       creditos: [this.selectedCurso.creditos, [Validators.required, Validators.min(0)]],
       es_epsilon: [],
       es_tipo_e: [],
@@ -75,8 +75,9 @@ export class CursoComponent implements OnInit {
     this.cursoForm = this.formBuilder.group({
       nombre: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       sigla: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      codigo: ["", [Validators.required, Validators.min(1000), Validators.max(7000)]],
+      codigo: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(5)]],
       creditos: ["", [Validators.required, Validators.min(0)]],
+      departamento: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       es_epsilon: [false],
       es_tipo_e: [false],
     })
@@ -84,6 +85,8 @@ export class CursoComponent implements OnInit {
 
   createCurso(curso: Curso) {
     curso.sigla = curso.sigla.toUpperCase();
+    curso.codigo = curso.codigo.toUpperCase();
+    curso.departamento = curso.departamento.toUpperCase();
     curso.es_epsilon = this.epsilon;
     curso.es_tipo_e = this.tipoE;
 
@@ -123,7 +126,8 @@ export class CursoComponent implements OnInit {
     this.cursoForm = this.formBuilder.group({
       nombre: ["", [Validators.required, Validators.minLength(2)]],
       sigla: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      codigo: ["", [Validators.required, Validators.min(1000), Validators.max(7000)]],
+      codigo: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(5)]],
+      departamento: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       creditos: ["", [Validators.required, Validators.min(0)]],
       es_epsilon: [false],
       es_tipo_e: [false],

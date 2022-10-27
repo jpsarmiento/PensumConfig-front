@@ -1,0 +1,35 @@
+<!-- Titulo y agregar -->
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-9">
+      <h3> Agregar requisitos al programa: </h3>
+    </div>
+    <div class="col-2">
+      <div class="input-group rounded">
+        <input type="search" id="filtro" class="form-control rounded" placeholder="Búsqueda" aria-label="Busqueda" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-secondary" (click)="filtrar()">🔍︎</button>
+      </div>
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-outline-success" routerLink="/programas/{{programaDetail.id}}/detalle"
+        (click)="addRequisitosPrograma()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Lista de requisitos -->
+    <div class="col">
+      <div class="row">
+        <div class="col-2 mt-2" *ngFor="let c of requisitos">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{c.nombre}}</h5>
+              <button type="button" class="btn btn-outline-primary" (click)="addRequisito(c)">Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

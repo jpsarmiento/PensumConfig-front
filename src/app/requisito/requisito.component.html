@@ -1,0 +1,178 @@
+<!-- Titulo y agregar -->
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-9">
+      <h3> Requisitos existentes: </h3>
+    </div>
+
+    <div class="col-2">
+      <div class="input-group rounded">
+        <input type="search" id="filtro" class="form-control rounded" placeholder="Búsqueda" aria-label="Busqueda" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-secondary" (click)="filtrar()">🔍︎</button>
+      </div>
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        (click)="formularioCrear()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Lista de cursos -->
+    <div class="col">
+      <div class="row">
+        <div class="col-2 mt-2" *ngFor="let c of requisitos">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{c.nombre}}</h5>
+              <button type="button" class="btn btn-outline-primary me-2 btn-sm" data-bs-toggle="modal"
+                data-bs-target="#detalleModal" (click)="onSelected(c)">Detalle</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRequisito(c)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Crear un nuevo requisito</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="requisitoForm" (ngSubmit)="!requisitoForm.invalid">
+              <!--Nombre-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="nombre">Nombre</label>
+                <input novalidate id="nombre" class="form-control" formControlName="nombre"
+                  placeholder="Nombre del requisito"/>
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                requisitoForm.get('nombre')!.hasError('required') &&
+                requisitoForm.get('nombre')!.touched">
+                  Nombre requerido
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="requisitoForm.get('nombre')!.hasError('minlength')">
+                  Nombre muy corto
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="requisitoForm.get('nombre')!.hasError('maxlength')">
+                  Nombre muy largo
+                </div>
+              </div>
+              <!--Descripcion-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="descripcion">Descripción</label>
+                <input novalidate id="descripcion" class="form-control" formControlName="descripcion"
+                  placeholder="Descripción"/>
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                requisitoForm.get('descripcion')!.hasError('required') &&
+                requisitoForm.get('descripcion')!.touched">
+                  Descripción requerida
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="requisitoForm.get('descripcion')!.hasError('minlength')">
+                  Descripción muy corta
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+              (click)="requisitoForm.reset()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!requisitoForm.valid"
+              (click)="createRequisito(requisitoForm.value)">Crear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form 2 -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="myModalLabel">Editar examen</h1>
+            <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#detalleModal"
+              aria-label="Close" (click)="requisitoForm.reset()"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="requisitoForm" (ngSubmit)="!requisitoForm.invalid">
+              <!--Nombre-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="nombre">Nombre</label>
+                <input novalidate id="nombre" class="form-control" formControlName="nombre"
+                  placeholder="Nombre del examen"/>
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                requisitoForm.get('nombre')!.hasError('required') &&
+                requisitoForm.get('nombre')!.touched">
+                  Nombre requerido
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="requisitoForm.get('nombre')!.hasError('minlength')">
+                  Nombre muy corto
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="requisitoForm.get('nombre')!.hasError('maxlength')">
+                  Nombre muy largo
+                </div>
+              </div>
+              <!--Descripcion-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="descripcion">Descripción</label>
+                <input novalidate id="descripcion" class="form-control" formControlName="descripcion"
+                  placeholder="Descripción"/>
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+                requisitoForm.get('descripcion')!.hasError('required') &&
+                requisitoForm.get('descripcion')!.touched">
+                  Descripción requerida
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="requisitoForm.get('descripcion')!.hasError('minlength')">
+                  Descripción muy corta
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
+              (click)="requisitoForm.reset()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal" [disabled]="!requisitoForm.valid"
+              (click)="updateRequisito(requisitoForm.value)">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form 3 -->
+    <div class="modal fade bd-example-modal-sm" id="detalleModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" *ngIf="selected">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{selectedRequisito.nombre}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item "> <span style="font-weight:bold">Descripción:</span> {{selectedRequisito.descripcion}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+              (click)="formularioModificar()">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>

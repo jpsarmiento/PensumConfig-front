@@ -90,19 +90,19 @@
               <div class="form-group mx-sm-3 mb-2">
                 <label for="codigo">Codigo</label>
                 <input novalidate id="codigo" class="form-control" formControlName="codigo"
-                  placeholder="Codigo del curso" type="number" />
+                  placeholder="Codigo del curso" style="text-transform: uppercase"/>
                 <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               cursoForm.get('codigo')!.hasError('required') &&
               cursoForm.get('codigo')!.touched ">
-                  Codigo requerido
+                  Código requerido
                 </div>
                 <div class="alert alert-danger alert-dismissible fade show"
-                  *ngIf="cursoForm.get('codigo')!.hasError('min')">
-                  El codigo debe estar entre el 1000 y el 7000
+                  *ngIf="cursoForm.get('codigo')!.hasError('minlength')">
+                  El código debe ser un número de 4 caracteres con una letra opcional al final
                 </div>
                 <div class="alert alert-danger alert-dismissible fade show"
-                  *ngIf="cursoForm.get('codigo')!.hasError('max')">
-                  El codigo debe estar entre el 1000 y el 7000
+                  *ngIf="cursoForm.get('codigo')!.hasError('maxlength')">
+                  El código debe ser un número de 4 caracteres con una letra opcional al final
                 </div>
               </div>
               <!--Creditos-->
@@ -118,6 +118,26 @@
                 <div class="alert alert-danger alert-dismissible fade show"
                   *ngIf="cursoForm.get('creditos')!.hasError('min')">
                   Los creditos deben ser un numero positivo
+                </div>
+              </div>
+
+              <!--Departamento-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="departamento">Departamento</label>
+                <input novalidate id="departamento" class="form-control" formControlName="departamento" placeholder="Departamento del curso"
+                  style="text-transform: uppercase" />
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              cursoForm.get('departamento')!.hasError('required') &&
+              cursoForm.get('departamento')!.touched">
+                  Departamento requerido
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="cursoForm.get('departamento')!.hasError('minlength')">
+                  El departamento debe ser de 4 caracteres
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="cursoForm.get('departamento')!.hasError('maxlength')">
+                  El departamento debe ser de 4 caracteres
                 </div>
               </div>
               <!--Epsilon-->
@@ -196,23 +216,24 @@
                   La sigla debe ser de 4 caracteres
                 </div>
               </div>
+
               <!--Codigo-->
               <div class="form-group mx-sm-3 mb-2">
                 <label for="codigo">Codigo</label>
                 <input novalidate id="codigo" class="form-control" formControlName="codigo"
-                  placeholder="Codigo del curso" type="number" />
+                  placeholder="Codigo del curso" style="text-transform: uppercase"/>
                 <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               cursoForm.get('codigo')!.hasError('required') &&
               cursoForm.get('codigo')!.touched ">
-                  Codigo requerido
+                  Código requerido
                 </div>
                 <div class="alert alert-danger alert-dismissible fade show"
-                  *ngIf="cursoForm.get('codigo')!.hasError('min')">
-                  El codigo debe estar entre el 1000 y el 7000
+                  *ngIf="cursoForm.get('codigo')!.hasError('minlength')">
+                  El código debe ser un número de 4 caracteres con una letra opcional al final
                 </div>
                 <div class="alert alert-danger alert-dismissible fade show"
-                  *ngIf="cursoForm.get('codigo')!.hasError('max')">
-                  El codigo debe estar entre el 1000 y el 7000
+                  *ngIf="cursoForm.get('codigo')!.hasError('maxlength')">
+                  El código debe ser un número de 4 caracteres con una letra opcional al final
                 </div>
               </div>
               <!--Creditos-->
@@ -228,6 +249,26 @@
                 <div class="alert alert-danger alert-dismissible fade show"
                   *ngIf="cursoForm.get('creditos')!.hasError('min')">
                   Los creditos deben ser un numero positivo
+                </div>
+              </div>
+
+              <!--Departamento-->
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="departamento">Departamento</label>
+                <input novalidate id="departamento" class="form-control" formControlName="departamento" placeholder="Departamento del curso"
+                  style="text-transform: uppercase" />
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+              cursoForm.get('departamento')!.hasError('required') &&
+              cursoForm.get('departamento')!.touched">
+                  Departamento requerido
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="cursoForm.get('departamento')!.hasError('minlength')">
+                  El departamento debe ser de 4 caracteres
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                  *ngIf="cursoForm.get('departamento')!.hasError('maxlength')">
+                  El departamento debe ser de 4 caracteres
                 </div>
               </div>
               <!--Epsilon-->
@@ -274,7 +315,7 @@
                   <li class="list-group-item "> <span style="font-weight:bold">Código:</span>
                     {{selectedCurso.sigla}}-{{selectedCurso.codigo}}</li>
                   <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedCurso.creditos}}</li>
-                  <li class="list-group-item"><span style="font-weight:bold">Departamento:</span> {{selectedCurso.sigla}}</li>
+                  <li class="list-group-item"><span style="font-weight:bold">Departamento:</span> {{selectedCurso.departamento}}</li>
                   <li class="list-group-item"><span style="font-weight:bold">Tipo Epsilon:</span> {{selectedCurso.es_epsilon}}</li>
                   <li class="list-group-item"><span style="font-weight:bold">Tipo E:</span> {{selectedCurso.es_tipo_e}}</li>
                 </ul>
