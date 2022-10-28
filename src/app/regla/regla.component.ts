@@ -54,7 +54,9 @@ export class ReglaComponent implements OnInit {
   deleteRegla(regla: Regla) {
     this.reglaService.deleteRegla(regla.id).subscribe(response => {
       this.reglas = this.reglas.filter(item => item.id != regla.id);
+      this.toastr.success(regla.nombre, "Regla eliminada");
     })
+    this.selected = false;
   }
 
   formularioModificar() {

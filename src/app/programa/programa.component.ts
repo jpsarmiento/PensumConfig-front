@@ -35,7 +35,9 @@ export class ProgramaComponent implements OnInit {
   deletePrograma(programa: Programa) {
     this.programaService.deletePrograma(programa.id).subscribe(response => {
       this.programas = this.programas.filter(item => item.id != programa.id);
+      this.toastr.success(programa.nombre, "Programa eliminado");
     })
+    this.selected = false;
   }
 
   formularioModificar() {

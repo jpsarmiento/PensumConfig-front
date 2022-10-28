@@ -38,7 +38,9 @@ export class CursoComponent implements OnInit {
   deleteCurso(curso: Curso) {
     this.cursoService.deleteCurso(curso.id).subscribe(response => {
       this.cursos = this.cursos.filter(item => item.id != curso.id);
+      this.toastr.success(curso.sigla+"-"+curso.codigo, "Curso eliminado");
     })
+    this.selected = false;
   }
 
   checkEpsilon(value: Boolean) {

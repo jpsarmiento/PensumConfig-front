@@ -35,7 +35,9 @@ export class AreaComponent implements OnInit {
   deleteArea(area: Area) {
     this.areaService.deleteArea(area.id).subscribe(response => {
       this.areas = this.areas.filter(item => item.id != area.id);
+      this.toastr.success(area.nombre, "Área eliminada");
     })
+    this.selected=false;
   }
 
   formularioModificar() {

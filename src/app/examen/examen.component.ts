@@ -34,7 +34,9 @@ export class ExamenComponent implements OnInit {
     deleteExamen(examen: Examen) {
       this.examenService.deleteExamen(examen.id).subscribe(response => {
         this.examenes = this.examenes.filter(item => item.id != examen.id);
+        this.toastr.success(examen.nombre, "Examen eliminado");
       })
+      this.selected = false;
     }
 
     formularioModificar() {

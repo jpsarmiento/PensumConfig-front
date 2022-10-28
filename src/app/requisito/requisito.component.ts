@@ -35,7 +35,9 @@ export class RequisitoComponent implements OnInit {
     deleteRequisito(requisito: Requisito) {
       this.requisitoService.deleteRequisito(requisito.id).subscribe(response => {
         this.requisitos = this.requisitos.filter(item => item.id != requisito.id);
+        this.toastr.success(requisito.nombre, "Requisito eliminado");
       })
+      this.selected = false;
     }
 
     formularioModificar() {
