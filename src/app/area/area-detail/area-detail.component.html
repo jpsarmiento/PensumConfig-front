@@ -1,5 +1,12 @@
-<div class="container-fluid bg-dark my-4" style="--bs-bg-opacity: .8; color:lightgrey" >
-  <p class="h3 p-3" >Área: {{ areaDetail.nombre }}</p>
+<div class="container-fluid bg-dark my-4 pb-4 ps-4 rounded" style="--bs-bg-opacity: .8; color:lightgrey" >
+  <div class="row">
+    <div class="col-10">
+      <p class="h3 p-3">Área: {{ areaDetail.nombre }}</p>
+    </div>
+    <div class="col-2">
+      <button type="button" id="goMain" class="btn btn-outline-success my-3 mx-2" routerLink="/areas/lista">Ir a áreas</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col-2">
       <div class="thumb">
@@ -18,7 +25,7 @@
         <dd>{{ areaDetail.creditos }}</dd>
         <hr />
         <div class="row">
-          <div class="col-4">
+          <div class="col-10">
             <dt>Reglas:</dt>
           </div>
           <div class="col">
@@ -26,7 +33,7 @@
           </div>
         </div>
         <div class="row" *ngFor="let regla of reglas">
-          <div class="col-4">
+          <div class="col-10">
           <dd routerLink="/reglas/{{regla.id}}/detalle">
             <u>{{regla.nombre}}</u>
            </dd>

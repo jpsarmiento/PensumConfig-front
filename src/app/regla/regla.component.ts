@@ -122,12 +122,12 @@ export class ReglaComponent implements OnInit {
   }
 
   getCursosTexto(termino: Termino): string {
-    var rta = '('
+    var rta = ''
     termino.cursos.forEach(function(curso) {
-      rta += curso.sigla+'-'+curso.codigo+' y '
+      rta += curso.sigla+'-'+curso.codigo+', Y '
     })
-    rta = rta.slice(0,-3)
-    return rta+') ó'
+    rta = rta.slice(0,-4)
+    return rta+' ó'
   }
 
 }

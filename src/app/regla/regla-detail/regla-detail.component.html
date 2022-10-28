@@ -1,5 +1,13 @@
-<div class="container-fluid bg-dark my-4" style="--bs-bg-opacity: .8; color:lightgrey" >
-  <p class="h3 p-3">Regla: {{ reglaDetail.nombre }}</p>
+<div class="container-fluid bg-dark my-4 pb-4 ps-4 rounded" style="--bs-bg-opacity: .8; color:lightgrey" >
+
+  <div class="row">
+    <div class="col-10">
+      <p class="h3 p-3">Regla: {{ reglaDetail.nombre }}</p>
+    </div>
+    <div class="col-2">
+      <button type="button" id="goMain" class="btn btn-outline-success my-3 mx-2" routerLink="/reglas/lista">Ir a reglas</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col-2">
       <div class="thumb">
@@ -24,7 +32,7 @@
         <hr />
 
         <div class="row">
-          <div class="col-4">
+          <div class="col-10">
             <dt>Se cumple con:</dt>
           </div>
           <div class="col">
@@ -33,7 +41,7 @@
         </div>
 
         <div class="row" *ngFor="let termino of terminos">
-          <div class="col-4">
+          <div class="col-10">
           <dd>{{getCursosTexto(termino)}}</dd>
           </div>
           <div class="col">
@@ -44,7 +52,7 @@
         <hr />
 
         <div class="row">
-          <div class="col-4">
+          <div class="col-10">
             <dt>Exámenes:</dt>
           </div>
           <div class="col">
@@ -53,7 +61,7 @@
         </div>
 
         <div class="row" *ngFor="let examen of examenes">
-          <div class="col-4">
+          <div class="col-10">
           <dd>{{examen.nombre}}</dd>
           </div>
           <div class="col">
