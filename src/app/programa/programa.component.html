@@ -2,7 +2,7 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <div class="col-9">
-      <h3> Programas existentes: </h3>
+      <h3 style="color:lightgrey"> Programas existentes: </h3>
     </div>
     <div class="col-2">
       <div class="input-group rounded">
@@ -25,9 +25,9 @@
     <div class="col">
       <div class="row">
         <div class="col-2 mt-2" *ngFor="let c of programas">
-          <div class="card text-center">
+          <div class="card text-center bg-dark" style="--bs-bg-opacity: .8;">
             <div class="card-body">
-              <h5 class="card-title"><a routerLink="/programas/{{ c.id }}/detalle"><u>{{c.nombre}}</u></a></h5>
+              <h5 class="card-title"><a routerLink="/programas/{{ c.id }}/detalle"><u style="color:lightgrey">{{c.nombre}}</u></a></h5>
               <button type="button" class="btn btn-outline-primary me-2 btn-sm" data-bs-toggle="modal"
                 data-bs-target="#detalleModal" (click)="onSelected(c)">Editar</button>
               <button type="button" class="btn btn-outline-danger btn-sm" (click)="deletePrograma(c)">Eliminar</button>
@@ -88,21 +88,21 @@
           </div>
           <!--Min gpa-->
           <div class="form-group mx-sm-3 mb-2">
-            <label for="min_gpa">GPA mínimo</label>
+            <label for="min_gpa">PGA mínimo</label>
             <input novalidate id="min_gpa" class="form-control" formControlName="min_gpa"
-              placeholder="GPA mínimo" type="number" />
+              placeholder="PGA mínimo" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               programaForm.get('min_gpa')!.hasError('required') &&
               programaForm.get('min_gpa')!.touched">
-              GPA requerido
+              PGA requerido
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
               *ngIf="programaForm.get('min_gpa')!.hasError('min')">
-              El GPA mínimo debe ser un número positivo
+              El PGA mínimo debe ser un número positivo
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
               *ngIf="programaForm.get('min_gpa')!.hasError('max')">
-              El GPA mínimo debe ser menor a 5
+              El PGA mínimo debe ser menor a 5
             </div>
           </div>
         </form>
@@ -167,21 +167,21 @@
           </div>
           <!--Min gpa-->
           <div class="form-group mx-sm-3 mb-2">
-            <label for="min_gpa">GPA mínimo</label>
+            <label for="min_gpa">PGA mínimo</label>
             <input novalidate id="min_gpa" class="form-control" formControlName="min_gpa"
-              placeholder="GPA mínimo" type="number" />
+              placeholder="PGA mínimo" type="number" />
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               programaForm.get('min_gpa')!.hasError('required') &&
               programaForm.get('min_gpa')!.touched">
-              GPA requerido
+              PGA requerido
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
               *ngIf="programaForm.get('min_gpa')!.hasError('min')">
-              El GPA mínimo debe ser un número positivo
+              El PGA mínimo debe ser un número positivo
             </div>
             <div class="alert alert-danger alert-dismissible fade show"
               *ngIf="programaForm.get('min_gpa')!.hasError('max')">
-              El GPA mínimo debe ser menor a 5
+              El PGA mínimo debe ser menor a 5
             </div>
           </div>
         </form>
@@ -209,12 +209,15 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
-            <ul class="list-group list-group-flush">
+            <ul>
               <li class="list-group-item"><span style="font-weight:bold">Tipo:</span> {{selectedPrograma.tipo}}</li>
-              <li class="list-group-item"><span style="font-weight:bold">GPA mínimo:</span> {{selectedPrograma.min_gpa}}</li>
+              <hr>
+              <li class="list-group-item"><span style="font-weight:bold">PGA mínimo:</span> {{selectedPrograma.min_gpa}}</li>
+              <hr>
               <li class="list-group-item"><span style="font-weight:bold">Áreas:</span>
                 <p *ngFor="let area of selectedPrograma.areas" style="margin-bottom:4px">{{area.nombre}}</p>
               </li>
+              <hr>
               <li class="list-group-item"><span style="font-weight:bold">Requisitos:</span>
                 <p *ngFor="let req of selectedPrograma.requisitos" style="margin-bottom:4px">{{req.nombre}}</p>
               </li>

@@ -1,0 +1,12 @@
+body{
+  background-image:url('https://uniandes.edu.co/sites/default/files/microsoftteams-image_7.png');
+  background-repeat: repeat;
+}
+
+.modal-content{
+	background-color: #292b2c;
+}
+
+.modal-title, .modal-body{
+  color: lightgray;
+}

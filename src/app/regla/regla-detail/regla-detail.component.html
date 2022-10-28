@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid bg-dark my-4" style="--bs-bg-opacity: .8; color:lightgrey" >
   <p class="h3 p-3">Regla: {{ reglaDetail.nombre }}</p>
   <div class="row">
     <div class="col-2">
@@ -25,7 +25,7 @@
 
         <div class="row">
           <div class="col-4">
-            <dt>Cursos válidos:</dt>
+            <dt>Se cumple con:</dt>
           </div>
           <div class="col">
             <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addterm">Nuevo</button>

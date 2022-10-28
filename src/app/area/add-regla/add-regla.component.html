@@ -1,5 +1,5 @@
 <!-- Titulo y agregar -->
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4" style="color:lightgrey">
   <div class="row">
     <div class="col-9">
       <h3> Agregar reglas al área: </h3>
@@ -20,13 +20,13 @@
 <div class="container-fluid">
   <div class="row">
 
-    <!-- Lista de cursos -->
+    <!-- Lista de reglas -->
     <div class="col">
       <div class="row">
         <div class="col-2 mt-2" *ngFor="let c of reglas">
-          <div class="card text-center">
+          <div class="card text-center bg-dark" style="--bs-bg-opacity: .8;">
             <div class="card-body">
-              <h5 class="card-title">{{c.nombre}}</h5>
+              <h5 class="card-title" style="color:lightgrey">{{c.nombre}}</h5>
               <button type="button" class="btn btn-outline-primary" (click)="addRegla(c)">Agregar</button>
             </div>
           </div>

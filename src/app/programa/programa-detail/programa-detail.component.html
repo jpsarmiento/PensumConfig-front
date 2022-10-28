@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid bg-dark my-4" style="--bs-bg-opacity: .8; color:lightgrey" >
   <p class="h3 p-3">Programa: {{ programaDetail.nombre }}</p>
   <div class="row">
     <div class="col-2">
@@ -14,7 +14,7 @@
         <dt>Tipo:</dt>
         <dd> {{ programaDetail.tipo }}</dd>
         <hr />
-        <dt>GPA mínimo:</dt>
+        <dt>PGA mínimo:</dt>
         <dd>{{ programaDetail.min_gpa }}</dd>
         <hr />
         <div class="row">
@@ -28,7 +28,7 @@
         <div class="row" *ngFor="let area of areas">
           <div class="col-4">
           <dd routerLink="/areas/{{area.id}}/detalle">
-            <u>{{area.nombre}}</u>
+            <a href="href=/areas/{{area.id}}/detalle" style="color:lightgrey;"><u>{{area.nombre}}</u></a>
            </dd>
           </div>
           <div class="col">

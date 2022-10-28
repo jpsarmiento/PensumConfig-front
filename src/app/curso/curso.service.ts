@@ -16,6 +16,10 @@ export class CursoService {
     return this.http.get<Curso[]>(this.apiUrl);
   }
 
+  getCursosQuery(query: string): Observable<Curso[]> {
+    return this.http.get<Curso[]>(this.apiUrl+'/findByFilter/param?query='+query);
+  }
+
   getCurso(id: string): Observable<Curso> {
     return this.http.get<Curso>(this.apiUrl+'/'+id);
   }

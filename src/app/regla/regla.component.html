@@ -2,7 +2,7 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <div class="col-9">
-      <h3> Reglas existentes: </h3>
+      <h3 style="color:lightgrey"> Reglas existentes: </h3>
     </div>
     <div class="col-2">
       <div class="input-group rounded">
@@ -25,9 +25,10 @@
     <div class="col">
       <div class="row">
         <div class="col-2 mt-2" *ngFor="let c of reglas">
-          <div class="card text-center">
+          <div class="card text-center bg-dark" style="--bs-bg-opacity: .8;">
             <div class="card-body">
-              <h5 class="card-title"><a routerLink="/reglas/{{ c.id }}/detalle"><u>{{c.nombre}}</u></a></h5>
+              <h5 class="card-title"><a routerLink="/reglas/{{ c.id }}/detalle"><u
+                    style="color:lightgrey">{{c.nombre}}</u></a></h5>
               <button type="button" class="btn btn-outline-primary me-2 btn-sm" data-bs-toggle="modal"
                 data-bs-target="#detalleModal" (click)="onSelected(c)">Editar</button>
               <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRegla(c)">Eliminar</button>
@@ -221,8 +222,8 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detalleModal"
           (click)="reglaForm.reset()">Cancelar</button>
-        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal" [disabled]="!reglaForm.valid"
-          (click)="updateRegla(reglaForm.value)">Guardar</button>
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal"
+          [disabled]="!reglaForm.valid" (click)="updateRegla(reglaForm.value)">Guardar</button>
       </div>
     </div>
   </div>
@@ -241,17 +242,24 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item "> <span style="font-weight:bold">Semestre de inicio:</span>
-                  {{splitNum1(selectedRegla.semestre_inicio)}}-{{splitNum2(selectedRegla.semestre_inicio)}}</li>
-                <li class="list-group-item"><span style="font-weight:bold">Semestre de vigencia:</span>
-                  {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
-                  <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedRegla.creditos}}</li>
-                <li class="list-group-item"><span style="font-weight:bold">Cursos válidos:</span>
-                <p *ngFor="let termino of terminos" style="margin-bottom:4px">{{getCursosTexto(termino)}}</p></li>
-                <li class="list-group-item"><span style="font-weight:bold">Exámenes:</span>
-                <p *ngFor="let examen of selectedRegla.examenes" style="margin-bottom:4px">{{examen.nombre}}</p></li>
-              </ul>
+            <ul>
+              <li class="list-group-item "> <span style="font-weight:bold">Semestre de inicio:</span>
+                {{splitNum1(selectedRegla.semestre_inicio)}}-{{splitNum2(selectedRegla.semestre_inicio)}}</li>
+              <hr>
+              <li class="list-group-item"><span style="font-weight:bold">Semestre de vigencia:</span>
+                {{splitNum1(selectedRegla.semestre_vigencia)}}-{{splitNum2(selectedRegla.semestre_vigencia)}}</li>
+              <hr>
+              <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedRegla.creditos}}
+              </li>
+              <hr>
+              <li class="list-group-item"><span style="font-weight:bold">Se cumple con:</span>
+                <p *ngFor="let termino of terminos" style="margin-bottom:4px">{{getCursosTexto(termino)}}</p>
+              </li>
+              <hr>
+              <li class="list-group-item"><span style="font-weight:bold">Exámenes:</span>
+                <p *ngFor="let examen of selectedRegla.examenes" style="margin-bottom:4px">{{examen.nombre}}</p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

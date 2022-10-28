@@ -120,12 +120,14 @@ export class ReglaComponent implements OnInit {
       this.reglas =  this.reglas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
   }
 
+
   getCursosTexto(termino: Termino): string {
-    var rta = ""
+    var rta = '('
     termino.cursos.forEach(function(curso) {
-      rta += curso.sigla+'-'+curso.codigo+', '
+      rta += curso.sigla+'-'+curso.codigo+' y '
     })
-    return rta.slice(0,-2)
+    rta = rta.slice(0,-3)
+    return rta+') ó'
   }
 
 }

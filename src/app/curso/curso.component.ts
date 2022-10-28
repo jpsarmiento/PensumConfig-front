@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 export class CursoComponent implements OnInit {
 
   cursos: Array<Curso> = [];
-  allCursos:  Array<Curso> = [];
   selected: Boolean = false;
   selectedCurso!: Curso;
   cursoForm! : FormGroup;
@@ -39,7 +38,6 @@ export class CursoComponent implements OnInit {
   deleteCurso(curso: Curso) {
     this.cursoService.deleteCurso(curso.id).subscribe(response => {
       this.cursos = this.cursos.filter(item => item.id != curso.id);
-      this.allCursos = this.allCursos.filter(item => item.id != curso.id);
     })
   }
 
@@ -109,15 +107,16 @@ export class CursoComponent implements OnInit {
   }
 
   filtrar() {
-    if(this.allCursos.length==0 && this.cursos.length != 0)
-      this.allCursos = this.cursos;
-
-    this.cursos = this.allCursos;
     const filtro = document.getElementById('filtro') as HTMLInputElement;
     const value = filtro.value
 
-    if (value.length != 0)
-      this.cursos =  this.cursos.filter(item => item.sigla.includes(value.toUpperCase()));
+    if (value.length != 0) {
+    this.cursoService.getCursosQuery(value).subscribe({next: cursos =>
+      this.cursos = cursos, error: e => console.error(e)});
+    }
+    else {
+      this.getCursos();
+    }
   }
 
   ngOnInit() {

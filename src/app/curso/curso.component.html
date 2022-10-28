@@ -2,7 +2,7 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <div class="col-9">
-      <h3> Cursos existentes: </h3>
+      <h3 style="color:lightgrey"> Cursos existentes: </h3>
     </div>
 
     <div class="col-2">
@@ -25,9 +25,9 @@
     <div class="col">
       <div class="row">
         <div class="col-2 mt-2" *ngFor="let c of cursos">
-          <div class="card text-center">
+          <div class="card text-center bg-dark" style="--bs-bg-opacity: .8;">
             <div class="card-body">
-              <h5 class="card-title">{{c.sigla}}-{{c.codigo}}</h5>
+              <h5 class="card-title" style="color:lightgrey">{{c.sigla}}-{{c.codigo}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{c.nombre}}</h6>
               <button type="button" class="btn btn-outline-primary me-2 btn-sm" data-bs-toggle="modal"
                 data-bs-target="#detalleModal" (click)="onSelected(c)">Detalle</button>
@@ -311,12 +311,16 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
-                <ul class="list-group list-group-flush">
+                <ul>
                   <li class="list-group-item "> <span style="font-weight:bold">Código:</span>
                     {{selectedCurso.sigla}}-{{selectedCurso.codigo}}</li>
+                    <hr>
                   <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedCurso.creditos}}</li>
+                  <hr>
                   <li class="list-group-item"><span style="font-weight:bold">Departamento:</span> {{selectedCurso.departamento}}</li>
+                  <hr>
                   <li class="list-group-item"><span style="font-weight:bold">Tipo Epsilon:</span> {{selectedCurso.es_epsilon}}</li>
+                  <hr>
                   <li class="list-group-item"><span style="font-weight:bold">Tipo E:</span> {{selectedCurso.es_tipo_e}}</li>
                 </ul>
               </div>
