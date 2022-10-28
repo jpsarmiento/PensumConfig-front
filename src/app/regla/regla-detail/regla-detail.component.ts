@@ -6,6 +6,7 @@ import { Termino } from 'src/app/termino';
 import { Examen } from 'src/app/examen/examen';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {CommunicationService } from 'src/app/communication.service';
 
 @Component({
   selector: 'app-regla-detail',
@@ -14,6 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ReglaDetailComponent implements OnInit {
 
+  areaId: string = ''
   reglaId!: string;
   @Input() reglaDetail!: Regla;
   terminos: Array<Termino> = [];
@@ -23,6 +25,7 @@ export class ReglaDetailComponent implements OnInit {
   constructor(
    private route: ActivatedRoute,
    private reglaService: ReglaService,
+   private communicationService: CommunicationService,
    private formBuilder: FormBuilder,
    private toastr: ToastrService
   ) { }
@@ -77,6 +80,7 @@ export class ReglaDetailComponent implements OnInit {
       this.reglaId = this.route.snapshot.paramMap.get('id')!
       if (this.reglaId)
         this.getRegla();
+      this.getArea();
 
   }
 
@@ -97,5 +101,18 @@ export class ReglaDetailComponent implements OnInit {
     })
     rta = rta.slice(0,-4)
     return rta+' ó'
+  }
+
+  clearPrev() {
+    this.communicationService.writeAreaPrev("")
+    this.communicationService.writeProgramaPrev("")
+  }
+
+  clearArea() {
+    this.communicationService.writeAreaPrev("")
+  }
+
+  getArea() {
+    this.areaId = this.communicationService.getAreaPrev();
   }
 }

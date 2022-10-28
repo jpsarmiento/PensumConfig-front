@@ -6,6 +6,7 @@ import { Area } from 'src/app/area/area';
 import { Programa } from '../programa';
 import { ProgramaService } from '../programa.service';
 import { Requisito } from 'src/app/requisito/requisito';
+import {CommunicationService } from 'src/app/communication.service'
 
 @Component({
   selector: 'app-programa-detail',
@@ -13,7 +14,6 @@ import { Requisito } from 'src/app/requisito/requisito';
   styleUrls: ['./programa-detail.component.css']
 })
 export class ProgramaDetailComponent implements OnInit {
-
 
   programaId!: string;
   @Input() programaDetail!: Programa;
@@ -24,6 +24,7 @@ export class ProgramaDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private programaService: ProgramaService,
+    private communicationService: CommunicationService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService) { }
 
@@ -55,6 +56,10 @@ export class ProgramaDetailComponent implements OnInit {
     this.programaService.deleteRequisitoPrograma(this.programaDetail.id, req.id).subscribe(response => {
       this.requisitos = this.requisitos.filter(item => item.id != req.id)
     })
+  }
+
+  navegarArea() {
+    this.communicationService.writeProgramaPrev(this.programaDetail.id)
   }
 
   ngOnInit() {

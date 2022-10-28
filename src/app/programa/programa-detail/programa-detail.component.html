@@ -4,7 +4,7 @@
       <p class="h3 p-3">Programa: {{ programaDetail.nombre }}</p>
     </div>
     <div class="col-2">
-      <button type="button" id="goMain" class="btn btn-outline-success my-3 mx-2" routerLink="/programas/lista">Ir a programas</button>
+      <button type="button" id="goMain" class="btn btn-outline-secondary my-3 mx-2" routerLink="/programas/lista">Ir a programas</button>
     </div>
   </div>
 
@@ -36,7 +36,7 @@
         <div class="row" *ngFor="let area of areas">
           <div class="col-10">
           <dd routerLink="/areas/{{area.id}}/detalle">
-            <u>{{area.nombre}}</u>
+            <u (click)="navegarArea()">{{area.nombre}}</u>
            </dd>
           </div>
           <div class="col">

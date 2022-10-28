@@ -5,6 +5,7 @@ import { Regla } from 'src/app/regla/regla';
 import { Area } from '../area';
 import { AreaService } from '../area.service';
 import { ActivatedRoute } from '@angular/router';
+import {CommunicationService } from 'src/app/communication.service';
 
 @Component({
   selector: 'app-area-detail',
@@ -13,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AreaDetailComponent implements OnInit {
 
+  programaId: string = '';
   areaId!: string;
   @Input() areaDetail!: Area;
   reglas: Array<Regla> = [];
@@ -21,6 +23,7 @@ export class AreaDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private areaService: AreaService,
+    private communicationService: CommunicationService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService) { }
 
@@ -42,9 +45,23 @@ export class AreaDetailComponent implements OnInit {
     })
   }
 
+  navegarRegla() {
+    this.communicationService.writeAreaPrev(this.areaDetail.id)
+  }
+
+  clearPrev() {
+    this.communicationService.writeAreaPrev("")
+    this.communicationService.writeProgramaPrev("")
+  }
+
+  getPrograma() {
+    this.programaId = this.communicationService.getProgramaPrev();
+  }
+
   ngOnInit() {
       this.areaId = this.route.snapshot.paramMap.get('id')!
       if (this.areaId)
         this.getArea();
+      this.getPrograma();
   }
 }

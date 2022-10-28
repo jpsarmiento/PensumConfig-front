@@ -1,10 +1,13 @@
 <div class="container-fluid bg-dark my-4 pb-4 ps-4 rounded" style="--bs-bg-opacity: .8; color:lightgrey" >
   <div class="row">
-    <div class="col-10">
+    <div class="col-8">
       <p class="h3 p-3">Área: {{ areaDetail.nombre }}</p>
     </div>
     <div class="col-2">
-      <button type="button" id="goMain" class="btn btn-outline-success my-3 mx-2" routerLink="/areas/lista">Ir a áreas</button>
+      <button type="button" id="goMain" class="btn btn-outline-secondary my-3 mx-2" routerLink="/areas/lista" (click)="clearPrev()">Ir a áreas</button>
+    </div>
+    <div class="col-2">
+      <button type="button" id="goBack" class="btn btn-outline-secondary my-3 mx-1" routerLink="/programas/{{programaId}}/detalle" [disabled]="programaId==''" (click)="clearPrev()">Regresar al programa</button>
     </div>
   </div>
   <div class="row">
@@ -35,7 +38,7 @@
         <div class="row" *ngFor="let regla of reglas">
           <div class="col-10">
           <dd routerLink="/reglas/{{regla.id}}/detalle">
-            <u>{{regla.nombre}}</u>
+            <u (click)="navegarRegla()">{{regla.nombre}}</u>
            </dd>
           </div>
           <div class="col">
