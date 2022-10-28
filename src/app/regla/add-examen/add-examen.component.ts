@@ -17,7 +17,6 @@ export class AddExamenComponent implements OnInit {
   @Input() reglaDetail!: Regla;
   selected: Array<Examen> = [];
   examenes: Array<Examen> = [];
-  allExamenes:  Array<Examen> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,21 +36,21 @@ export class AddExamenComponent implements OnInit {
     }
 
     filtrar() {
-      if(this.allExamenes.length==0 && this.examenes.length != 0)
-        this.allExamenes = this.examenes;
-
-      this.examenes = this.allExamenes;
       const filtro = document.getElementById('filtro') as HTMLInputElement;
       const value = filtro.value
 
-      if (value.length != 0)
-        this.examenes =  this.examenes.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+      if (value.length != 0) {
+      this.examenService.getExamenesQuery(value).subscribe({next: examenes =>
+        this.examenes = examenes, error: e => console.error(e)});
+      }
+      else {
+        this.getExamenes();
+      }
     }
 
     addExamen(examen: Examen) {
       this.selected.push(examen)
       this.examenes = this.examenes.filter(item => item.id != examen.id);
-      this.allExamenes = this.allExamenes.filter(item => item.id != examen.id);
     }
 
     addExamenRegla(examen: Examen) {

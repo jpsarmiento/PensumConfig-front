@@ -12,7 +12,6 @@ import { Termino } from '../termino';
 })
 export class ReglaComponent implements OnInit {
 
-  allReglas: Array<Regla> = [];
   reglas: Array<Regla> = [];
   selected: Boolean = false;
   selectedRegla!: Regla;
@@ -55,7 +54,6 @@ export class ReglaComponent implements OnInit {
   deleteRegla(regla: Regla) {
     this.reglaService.deleteRegla(regla.id).subscribe(response => {
       this.reglas = this.reglas.filter(item => item.id != regla.id);
-      this.allReglas = this.allReglas.filter(item => item.id != regla.id);
     })
   }
 
@@ -109,17 +107,17 @@ export class ReglaComponent implements OnInit {
   }
 
   filtrar() {
-    if(this.allReglas.length==0 && this.reglas.length != 0)
-      this.allReglas = this.reglas;
-
-    this.reglas = this.allReglas;
     const filtro = document.getElementById('filtro') as HTMLInputElement;
     const value = filtro.value
 
-    if (value.length != 0)
-      this.reglas =  this.reglas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+    if (value.length != 0) {
+    this.reglaService.getReglasQuery(value).subscribe({next: reglas =>
+      this.reglas = reglas, error: e => console.error(e)});
+    }
+    else {
+      this.getReglas();
+    }
   }
-
 
   getCursosTexto(termino: Termino): string {
     var rta = '('

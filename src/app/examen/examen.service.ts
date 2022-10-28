@@ -22,6 +22,10 @@ export class ExamenService {
     return this.http.get<Examen>(this.apiUrl+'/'+id);
   }
 
+  getExamenesQuery(query: string): Observable<Examen[]> {
+    return this.http.get<Examen[]>(this.apiUrl+'/findByFilter/param?query='+query);
+  }
+
   deleteExamen(id: string) {
     return this.http.delete(this.apiUrl+'/'+id)
   }

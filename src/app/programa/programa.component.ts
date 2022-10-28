@@ -11,8 +11,6 @@ import { ProgramaService } from './programa.service';
 })
 export class ProgramaComponent implements OnInit {
 
-
-  allProgramas: Array<Programa> = [];
   programas: Array<Programa> = [];
   selected: Boolean = false;
   selectedPrograma!: Programa;
@@ -37,7 +35,6 @@ export class ProgramaComponent implements OnInit {
   deletePrograma(programa: Programa) {
     this.programaService.deletePrograma(programa.id).subscribe(response => {
       this.programas = this.programas.filter(item => item.id != programa.id);
-      this.allProgramas = this.allProgramas.filter(item => item.id != programa.id);
     })
   }
 
@@ -79,15 +76,16 @@ export class ProgramaComponent implements OnInit {
   }
 
   filtrar() {
-    if(this.allProgramas.length==0 && this.programas.length != 0)
-      this.allProgramas = this.programas;
-
-    this.programas = this.allProgramas;
     const filtro = document.getElementById('filtro') as HTMLInputElement;
     const value = filtro.value
 
-    if (value.length != 0)
-      this.programas =  this.programas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+    if (value.length != 0) {
+    this.programaService.getProgramasQuery(value).subscribe({next: programs =>
+      this.programas = programs, error: e => console.error(e)});
+    }
+    else {
+      this.getProgramas();
+    }
   }
 
 }

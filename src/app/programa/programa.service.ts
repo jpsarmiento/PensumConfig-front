@@ -24,6 +24,10 @@ export class ProgramaService {
     return this.http.get<Programa>(this.apiUrl+'/'+id);
   }
 
+  getProgramasQuery(query: string): Observable<Programa[]> {
+    return this.http.get<Programa[]>(this.apiUrl+'/findByFilter/param?query='+query);
+  }
+
   deletePrograma(id: string) {
     return this.http.delete(this.apiUrl+'/'+id)
   }

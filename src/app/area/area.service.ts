@@ -23,6 +23,10 @@ export class AreaService {
     return this.http.get<Area>(this.apiUrl+'/'+id);
   }
 
+  getAreasQuery(query: string): Observable<Area[]> {
+    return this.http.get<Area[]>(this.apiUrl+'/findByFilter/param?query='+query);
+  }
+
   deleteArea(id: string) {
     return this.http.delete(this.apiUrl+'/'+id)
   }

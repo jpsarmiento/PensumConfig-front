@@ -21,6 +21,10 @@ export class RequisitoService {
     return this.http.get<Requisito>(this.apiUrl+'/'+id);
   }
 
+  getRequisitosQuery(query: string): Observable<Requisito[]> {
+    return this.http.get<Requisito[]>(this.apiUrl+'/findByFilter/param?query='+query);
+  }
+
   deleteRequisito(id: string) {
     return this.http.delete(this.apiUrl+'/'+id)
   }

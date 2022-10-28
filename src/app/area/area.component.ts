@@ -11,7 +11,6 @@ import { AreaService } from './area.service';
 })
 export class AreaComponent implements OnInit {
 
-  allAreas: Array<Area> = [];
   areas: Array<Area> = [];
   selected: Boolean = false;
   selectedArea!: Area;
@@ -36,7 +35,6 @@ export class AreaComponent implements OnInit {
   deleteArea(area: Area) {
     this.areaService.deleteArea(area.id).subscribe(response => {
       this.areas = this.areas.filter(item => item.id != area.id);
-      this.allAreas = this.allAreas.filter(item => item.id != area.id);
     })
   }
 
@@ -78,14 +76,15 @@ export class AreaComponent implements OnInit {
   }
 
   filtrar() {
-    if(this.allAreas.length==0 && this.areas.length != 0)
-      this.allAreas = this.areas;
-
-    this.areas = this.allAreas;
     const filtro = document.getElementById('filtro') as HTMLInputElement;
     const value = filtro.value
 
-    if (value.length != 0)
-      this.areas =  this.areas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+    if (value.length != 0) {
+    this.areaService.getAreasQuery(value).subscribe({next: areas =>
+      this.areas = areas, error: e => console.error(e)});
+    }
+    else {
+      this.getAreas();
+    }
   }
 }

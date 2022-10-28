@@ -16,7 +16,6 @@ export class AddRequisitoComponent implements OnInit {
   @Input() programaDetail!: Programa;
   selected: Array<Requisito> = [];
   requisitos: Array<Requisito> = [];
-  allRequisitos:  Array<Requisito> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,21 +36,21 @@ export class AddRequisitoComponent implements OnInit {
     }
 
     filtrar() {
-      if(this.allRequisitos.length==0 && this.requisitos.length != 0)
-        this.allRequisitos= this.requisitos;
-
-      this.requisitos = this.allRequisitos;
       const filtro = document.getElementById('filtro') as HTMLInputElement;
       const value = filtro.value
 
-      if (value.length != 0)
-        this.requisitos =  this.requisitos.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+      if (value.length != 0) {
+      this.requisitoService.getRequisitosQuery(value).subscribe({next: requisitos =>
+        this.requisitos = requisitos, error: e => console.error(e)});
+      }
+      else {
+        this.getRequisitos();
+      }
     }
 
     addRequisito(requisito: Requisito) {
       this.selected.push(requisito)
       this.requisitos = this.requisitos.filter(item => item.id != requisito.id);
-      this.allRequisitos = this.allRequisitos.filter(item => item.id != requisito.id);
     }
 
     addRequisitoPrograma(requisito: Requisito) {

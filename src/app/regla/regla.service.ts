@@ -23,6 +23,10 @@ export class ReglaService {
     return this.http.get<Regla>(this.apiUrl+'/'+id);
   }
 
+  getReglasQuery(query: string): Observable<Regla[]> {
+    return this.http.get<Regla[]>(this.apiUrl+'/findByFilter/param?query='+query);
+  }
+
   deleteRegla(id: string) {
     return this.http.delete(this.apiUrl+'/'+id)
   }

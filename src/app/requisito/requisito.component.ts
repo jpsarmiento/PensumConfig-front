@@ -12,9 +12,7 @@ import { RequisitoService } from './requisito.service';
 })
 export class RequisitoComponent implements OnInit {
 
-
   requisitos: Array<Requisito> = [];
-  allRequisitos:  Array<Requisito> = [];
   selected: Boolean = false;
   selectedRequisito!: Requisito;
   requisitoForm! : FormGroup;
@@ -37,7 +35,6 @@ export class RequisitoComponent implements OnInit {
     deleteRequisito(requisito: Requisito) {
       this.requisitoService.deleteRequisito(requisito.id).subscribe(response => {
         this.requisitos = this.requisitos.filter(item => item.id != requisito.id);
-        this.allRequisitos = this.allRequisitos.filter(item => item.id != requisito.id);
       })
     }
 
@@ -72,15 +69,16 @@ export class RequisitoComponent implements OnInit {
     }
 
     filtrar() {
-      if(this.allRequisitos.length==0 && this.requisitos.length != 0)
-        this.allRequisitos = this.requisitos;
-
-      this.requisitos = this.allRequisitos;
       const filtro = document.getElementById('filtro') as HTMLInputElement;
       const value = filtro.value
 
-      if (value.length != 0)
-        this.requisitos =  this.requisitos.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+      if (value.length != 0) {
+      this.requisitoService.getRequisitosQuery(value).subscribe({next: requisitos =>
+        this.requisitos = requisitos, error: e => console.error(e)});
+      }
+      else {
+        this.getRequisitos();
+      }
     }
 
   ngOnInit() {

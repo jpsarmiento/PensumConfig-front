@@ -17,7 +17,6 @@ export class AddReglaComponent implements OnInit {
   @Input() areaDetail!: Area;
   selected: Array<Regla> = [];
   reglas: Array<Regla> = [];
-  allReglas:  Array<Regla> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -38,21 +37,21 @@ export class AddReglaComponent implements OnInit {
     }
 
     filtrar() {
-      if(this.allReglas.length==0 && this.reglas.length != 0)
-        this.allReglas= this.reglas;
-
-      this.reglas = this.allReglas;
       const filtro = document.getElementById('filtro') as HTMLInputElement;
       const value = filtro.value
 
-      if (value.length != 0)
-        this.reglas =  this.reglas.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+      if (value.length != 0) {
+      this.reglaService.getReglasQuery(value).subscribe({next: reglas =>
+        this.reglas = reglas, error: e => console.error(e)});
+      }
+      else {
+        this.getReglas();
+      }
     }
 
     addRegla(regla: Regla) {
       this.selected.push(regla)
       this.reglas = this.reglas.filter(item => item.id != regla.id);
-      this.allReglas = this.allReglas.filter(item => item.id != regla.id);
     }
 
     addReglaArea(regla: Regla) {

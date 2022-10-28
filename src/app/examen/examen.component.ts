@@ -12,7 +12,6 @@ import { ExamenService } from './examen.service';
 export class ExamenComponent implements OnInit {
 
   examenes: Array<Examen> = [];
-  allExamenes:  Array<Examen> = [];
   selected: Boolean = false;
   selectedExamen!: Examen;
   examenForm! : FormGroup;
@@ -35,7 +34,6 @@ export class ExamenComponent implements OnInit {
     deleteExamen(examen: Examen) {
       this.examenService.deleteExamen(examen.id).subscribe(response => {
         this.examenes = this.examenes.filter(item => item.id != examen.id);
-        this.allExamenes = this.allExamenes.filter(item => item.id != examen.id);
       })
     }
 
@@ -70,15 +68,16 @@ export class ExamenComponent implements OnInit {
     }
 
     filtrar() {
-      if(this.allExamenes.length==0 && this.examenes.length != 0)
-        this.allExamenes = this.examenes;
-
-      this.examenes = this.allExamenes;
       const filtro = document.getElementById('filtro') as HTMLInputElement;
       const value = filtro.value
 
-      if (value.length != 0)
-        this.examenes =  this.examenes.filter(item => item.nombre.toUpperCase().includes(value.toUpperCase()));
+      if (value.length != 0) {
+      this.examenService.getExamenesQuery(value).subscribe({next: examenes =>
+        this.examenes = examenes, error: e => console.error(e)});
+      }
+      else {
+        this.getExamenes();
+      }
     }
 
   ngOnInit() {

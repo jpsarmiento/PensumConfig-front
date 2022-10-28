@@ -18,7 +18,6 @@ export class AddTerminoComponent implements OnInit {
   @Input() reglaDetail!: Regla;
   termino!: Termino;
   cursos: Array<Curso> = [];
-  allCursos:  Array<Curso> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -38,15 +37,16 @@ export class AddTerminoComponent implements OnInit {
     }
 
     filtrar() {
-      if(this.allCursos.length==0 && this.cursos.length != 0)
-        this.allCursos = this.cursos;
-
-      this.cursos = this.allCursos;
       const filtro = document.getElementById('filtro') as HTMLInputElement;
       const value = filtro.value
 
-      if (value.length != 0)
-        this.cursos =  this.cursos.filter(item => item.sigla.includes(value.toUpperCase()));
+      if (value.length != 0) {
+      this.cursoService.getCursosQuery(value).subscribe({next: cursos =>
+        this.cursos = cursos, error: e => console.error(e)});
+      }
+      else {
+        this.getCursos();
+      }
     }
 
     addCursoTermino(curso: Curso) {
@@ -55,7 +55,6 @@ export class AddTerminoComponent implements OnInit {
       })
 
       this.cursos = this.cursos.filter(item => item.id != curso.id);
-      this.allCursos = this.allCursos.filter(item => item.id != curso.id);
     }
 
     addTerminoRegla(termino: Termino) {
@@ -88,4 +87,3 @@ export class AddTerminoComponent implements OnInit {
     this.crearTermino(this.termino)
   }
 }
-
