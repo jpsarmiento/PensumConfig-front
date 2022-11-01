@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AddReglaComponent } from './area/add-regla/add-regla.component';
 import { AreaDetailComponent } from './area/area-detail/area-detail.component';
 import { AreaComponent } from './area/area.component';
 import { CursoComponent } from './curso/curso.component';
 import { ExamenComponent } from './examen/examen.component';
+import { HomeComponent } from './home/home.component';
 import { AddAreaComponent } from './programa/add-area/add-area.component';
 import { AddRequisitoComponent } from './programa/add-requisito/add-requisito.component';
 import { ProgramaDetailComponent } from './programa/programa-detail/programa-detail.component';
@@ -17,6 +17,9 @@ import { ReglaComponent } from './regla/regla.component';
 import { RequisitoComponent } from './requisito/requisito.component';
 
 const routes: Routes = [
+  {
+    path: '', component: HomeComponent
+  },
   {
     path: 'cursos', component: CursoComponent
   },

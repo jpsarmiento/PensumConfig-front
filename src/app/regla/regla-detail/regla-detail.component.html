@@ -39,7 +39,7 @@
             <dt>Se cumple con:</dt>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addterm">Nuevo</button>
+            <button type="button" class="btn btn-outline-success btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" routerLink="/reglas/{{reglaDetail.id}}/addterm">Asociar</button>
           </div>
         </div>
 
@@ -48,7 +48,7 @@
           <dd>{{getCursosTexto(termino)}}</dd>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteTermino(termino)">Quitar</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" (click)="deleteTermino(termino)">Quitar</button>
           </div>
         </div>
 
@@ -59,7 +59,7 @@
             <dt>Exámenes:</dt>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/reglas/{{reglaDetail.id}}/addexamen">Nuevo</button>
+            <button type="button" class="btn btn-outline-success btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" routerLink="/reglas/{{reglaDetail.id}}/addexamen">Asociar</button>
           </div>
         </div>
 
@@ -68,7 +68,7 @@
           <dd>{{examen.nombre}}</dd>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteExamen(examen)">Quitar</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" (click)="deleteExamen(examen)">Quitar</button>
           </div>
         </div>
 

@@ -30,7 +30,7 @@
             <dt>Áreas:</dt>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/programas/{{programaDetail.id}}/addarea">Nueva</button>
+            <button type="button" class="btn btn-outline-success btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" routerLink="/programas/{{programaDetail.id}}/addarea">Asociar</button>
           </div>
         </div>
         <div class="row" *ngFor="let area of areas">
@@ -40,7 +40,7 @@
            </dd>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteArea(area)">Quitar</button>
+            <button type="button" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" class="btn btn-outline-danger btn-sm" (click)="deleteArea(area)">Quitar</button>
           </div>
         </div>
 
@@ -51,17 +51,15 @@
             <dt>Requisitos:</dt>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/programas/{{programaDetail.id}}/addrequisito">Nuevo</button>
+            <button type="button" class="btn btn-outline-success btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" routerLink="/programas/{{programaDetail.id}}/addrequisito">Asociar</button>
           </div>
         </div>
         <div class="row" *ngFor="let requisito of requisitos">
           <div class="col-10">
-          <dd>
-            <u>{{requisito.nombre}}</u>
-           </dd>
+          <dd>{{requisito.nombre}}</dd>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRequisito(requisito)">Quitar</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" (click)="deleteRequisito(requisito)">Quitar</button>
           </div>
         </div>
       </dl>

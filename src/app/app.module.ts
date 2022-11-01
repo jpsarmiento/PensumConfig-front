@@ -13,10 +13,12 @@ import { ExamenModule } from './examen/examen.module';
 import { AreaModule } from './area/area.module';
 import { ProgramaModule } from './programa/programa.module';
 import { RequisitoModule } from './requisito/requisito.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent
    ],
   imports: [
     FormsModule,

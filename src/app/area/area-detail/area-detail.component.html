@@ -32,7 +32,7 @@
             <dt>Reglas:</dt>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-success btn-sm" routerLink="/areas/{{areaDetail.id}}/addregla">Nueva</button>
+            <button type="button" class="btn btn-outline-success btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" routerLink="/areas/{{areaDetail.id}}/addregla">Asociar</button>
           </div>
         </div>
         <div class="row" *ngFor="let regla of reglas">
@@ -42,7 +42,7 @@
            </dd>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRegla(regla)">Quitar</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" (click)="deleteRegla(regla)">Quitar</button>
           </div>
         </div>
       </dl>

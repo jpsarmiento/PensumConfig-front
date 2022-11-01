@@ -112,11 +112,11 @@
                 <div class="alert alert-danger alert-dismissible fade show" *ngIf="
               cursoForm.get('creditos')!.hasError('required') &&
               cursoForm.get('creditos')!.touched">
-                  Creditos requeridos
+                  Créditos requeridos
                 </div>
                 <div class="alert alert-danger alert-dismissible fade show"
                   *ngIf="cursoForm.get('creditos')!.hasError('min')">
-                  Los creditos deben ser un numero positivo
+                  Los créditos deben ser un numero positivo
                 </div>
               </div>
 
@@ -140,7 +140,7 @@
                 </div>
               </div>
               <!--Epsilon-->
-              <div class="form-group mx-sm-3 mb-2">
+              <div class="form-check mx-sm-3 mb-2">
                 <input id="es_epsilon" class="form-check-input" value="" type="checkbox"
                   (change)="checkEpsilon(!epsilon)">
                 <label class="form-check-label" for="es_epsilon">
@@ -148,7 +148,7 @@
                 </label>
               </div>
               <!--Tipo E-->
-              <div class="form-group mx-sm-3 mb-2">
+              <div class="form-check mx-sm-3 mb-2">
                 <input id="es_tipo_e" class="form-check-input" value="" type="checkbox" (change)="checkE(!tipoE)">
                 <label class="form-check-label" for="es_tipo_e">
                   Es tipo E
@@ -271,20 +271,21 @@
                 </div>
               </div>
               <!--Epsilon-->
-              <div class="form-group mx-sm-3 mb-2">
-                <input id="es_epsilon" class="form-check-input" value="" type="checkbox"
+              <div class="form-check mx-sm-3 mb-2">
+                <input id="es_epsilon_" class="form-check-input" value="" type="checkbox"
                   (change)="checkEpsilon2(!epsilon2)">
-                <label class="form-check-label" for="es_epsilon">
+                <label class="form-check-label" for="es_epsilon_">
                   Es epsilon
                 </label>
               </div>
               <!--Tipo E-->
-              <div class="form-group mx-sm-3 mb-2">
-                <input id="es_tipo_e" class="form-check-input" value="" type="checkbox" (change)="checkE2(!tipoE2)">
-                <label class="form-check-label" for="es_tipo_e">
+              <div class="form-check mx-sm-3 mb-2">
+                <input id="es_tipo_e_" class="form-check-input" value="" type="checkbox" (change)="checkE2(!tipoE2)">
+                <label class="form-check-label" for="es_tipo_e_">
                   Es tipo E
                 </label>
               </div>
+
             </form>
           </div>
           <div class="modal-footer">

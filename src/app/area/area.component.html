@@ -70,19 +70,16 @@
           <!--Prioridad-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="prioridad">Prioridad</label>
-            <input novalidate id="prioridad" class="form-control" formControlName="prioridad" placeholder="Prioridad" />
+            <select novalidate id="prioridad" class="form-control" formControlName="prioridad" placeholder="Prioridad">
+              <option>Baja</option>
+              <option>Media</option>
+              <option>Alta</option>
+              <option>Muy alta</option>
+            </select>
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
             areaForm.get('prioridad')!.hasError('required') &&
             areaForm.get('prioridad')!.touched">
               Prioridad requerida
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="areaForm.get('prioridad')!.hasError('minlength')">
-              La prioridad debe ser Baja, Media, Alta o Muy alta
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="areaForm.get('prioridad')!.hasError('maxlength')">
-              La prioridad debe ser Baja, Media, Alta o Muy alta
             </div>
           </div>
           <!--Creditos-->
@@ -145,19 +142,16 @@
           <!--Prioridad-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="prioridad">Prioridad</label>
-            <input novalidate id="prioridad" class="form-control" formControlName="prioridad" placeholder="Prioridad" />
+            <select novalidate id="prioridad" class="form-control" formControlName="prioridad" placeholder="Prioridad">
+              <option>Baja</option>
+              <option>Media</option>
+              <option>Alta</option>
+              <option>Muy alta</option>
+            </select>
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
             areaForm.get('prioridad')!.hasError('required') &&
             areaForm.get('prioridad')!.touched">
               Prioridad requerida
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="areaForm.get('prioridad')!.hasError('minlength')">
-              La prioridad debe ser Baja, Media, Alta o Muy alta
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="areaForm.get('prioridad')!.hasError('maxlength')">
-              La prioridad debe ser Baja, Media, Alta o Muy alta
             </div>
           </div>
           <!--Creditos-->
