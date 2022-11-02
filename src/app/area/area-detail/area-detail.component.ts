@@ -54,6 +54,10 @@ export class AreaDetailComponent implements OnInit {
     this.communicationService.writeProgramaPrev("")
   }
 
+  writePrograma(id: string) {
+    this.communicationService.writeProgramaPrev(id);
+  }
+
   getPrograma() {
     this.programaId = this.communicationService.getProgramaPrev();
   }

@@ -4,9 +4,9 @@ body{
 }
 
 .modal-content{
-	background-color: #292b2c;
+	background-color: rgb(230, 235, 235);;
 }
 
 .modal-title, .modal-body{
-  color: lightgray;
+  color: black;
 }

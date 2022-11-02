@@ -112,6 +112,10 @@ export class ReglaDetailComponent implements OnInit {
     this.communicationService.writeAreaPrev("")
   }
 
+  writeArea(id: string) {
+    this.communicationService.writeAreaPrev(id);
+  }
+
   getArea() {
     this.areaId = this.communicationService.getAreaPrev();
   }
