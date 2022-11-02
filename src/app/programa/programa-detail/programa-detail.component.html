@@ -12,6 +12,8 @@
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/University_of_Los_Andes_logo.svg/1200px-University_of_Los_Andes_logo.svg.png"
           alt="Logo Universidad de los Andes" />
       </div>
+
+      <a type="button" class="btn btn-outline-secondary my-3 mx-1" style="width:180px; height: 32px; padding-top: 2px" (click)="descargar()">Descargar</a>
     </div>
     <div class="col">
       <dl>
@@ -32,8 +34,12 @@
         </div>
         <div class="row" *ngFor="let area of areas">
           <div class="col-10">
-          <dd routerLink="/areas/{{area.id}}/detalle">
-            <u (click)="navegarArea()">{{area.nombre}}</u>
+          <dd>
+            <u (click)="navegarArea()" routerLink="/areas/{{area.id}}/detalle">{{area.nombre}} - {{area.creditos}} créditos</u>
+            <br>
+            <em>
+              {{getReglasTexto(area)}}
+            </em>
            </dd>
           </div>
           <div class="col">

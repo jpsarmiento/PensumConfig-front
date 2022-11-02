@@ -63,5 +63,4 @@ export class ProgramaService {
  deleteRequisitoPrograma(programaid: string, requisito: string) {
   return this.http.delete(this.apiUrl+'/'+programaid+'/requisitos/'+requisito)
  }
-
 }

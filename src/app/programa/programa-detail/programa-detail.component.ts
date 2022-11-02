@@ -7,6 +7,7 @@ import { Programa } from '../programa';
 import { ProgramaService } from '../programa.service';
 import { Requisito } from 'src/app/requisito/requisito';
 import {CommunicationService } from 'src/app/communication.service'
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-programa-detail',
@@ -33,12 +34,14 @@ export class ProgramaDetailComponent implements OnInit {
       this.programaDetail = programa;
       this.getAreas(programa);
       this.getRequisitos(programa);
+      console.log(programa)
     })
   }
 
   getAreas(programa: Programa): void {
-    this.programaService.getAreas(programa.id).subscribe({ next: areas =>
-      this.areas = areas})
+    this.programaService.getAreas(programa.id).subscribe(areas => {
+      this.areas = areas
+    })
   }
 
   getRequisitos(programa: Programa): void {
@@ -68,5 +71,18 @@ export class ProgramaDetailComponent implements OnInit {
         this.getPrograma();
   }
 
+  getReglasTexto(area: Area): string {
+    var rta = ''
+    area.reglas.forEach(function(regla) {
+      rta += regla.nombre+', '
+    })
+    rta = rta.slice(0,-2)
+    return rta
+  }
 
+  descargar() {
+    var fileName = "programa_" + this.programaDetail.nombre + ".json"
+    var file = new Blob([JSON.stringify(this.programaDetail)], {type: 'application/json'})
+    saveAs(file, fileName)
+  }
 }
