@@ -7,6 +7,7 @@ import { Examen } from 'src/app/examen/examen';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {CommunicationService } from 'src/app/communication.service';
+import { Programa } from 'src/app/programa/programa';
 
 @Component({
   selector: 'app-regla-detail',
@@ -18,6 +19,7 @@ export class ReglaDetailComponent implements OnInit {
   areaId: string = ''
   reglaId!: string;
   @Input() reglaDetail!: Regla;
+  programas: Array<Programa> = [];
   terminos: Array<Termino> = [];
   examenes: Array<Examen> = [];
   reglaForm! : FormGroup;
@@ -35,12 +37,21 @@ export class ReglaDetailComponent implements OnInit {
       this.reglaDetail = regla;
       this.getTerminos(regla);
       this.getExamenes(regla);
+      this.getProgramas(regla);
     })
   }
 
   getTerminos(regla: Regla): void {
     this.reglaService.getTerminos(regla.id).subscribe({ next: terms =>
       this.terminos = terms})
+  }
+
+  getProgramas(regla: Regla): void {
+    regla.areas.forEach(area => {
+      this.programas = this.programas.concat(area.programas)
+    });
+
+    this.programas = [...new Map(this.programas.map((m) => [m.id, m])).values()];
   }
 
   getExamenes(regla: Regla): void {
@@ -114,6 +125,10 @@ export class ReglaDetailComponent implements OnInit {
 
   writeArea(id: string) {
     this.communicationService.writeAreaPrev(id);
+  }
+
+  writePrograma(id: string) {
+    this.communicationService.writeProgramaPrev(id);
   }
 
   getArea() {

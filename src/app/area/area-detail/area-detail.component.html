@@ -4,7 +4,7 @@
       <p class="h3 p-3">Área: {{ areaDetail.nombre }}</p>
     </div>
     <div class="col-3">
-      <button type="button" id="goMain" class="btn btn-outline-secondary my-3 mx-1" style="width:200px; height: 32px; padding-top: 2px" data-bs-toggle="modal" data-bs-target="#listadoModal">Programas presentes</button>
+      <button type="button" id="goMain" class="btn btn-outline-secondary my-3 mx-1" style="width:200px; height: 32px; padding-top: 2px" data-bs-toggle="modal" data-bs-target="#listadoModal">Presente en</button>
     </div>
     <div class="col-2">
       <button type="button" id="goBack" class="btn btn-outline-secondary my-3 mx-1" routerLink="/programas/{{programaId}}/detalle" style="width:200px; height: 32px; padding-top: 2px" [disabled]="programaId==''" (click)="clearPrev()">Regresar al programa</button>

@@ -5,7 +5,7 @@
       <p class="h3 p-3">Regla: {{ reglaDetail.nombre }}</p>
     </div>
     <div class="col-2">
-      <button type="button" id="goMain" class="btn btn-outline-secondary my-3 mx-1" style="width:200px; height: 32px; padding-top: 2px" data-bs-toggle="modal" data-bs-target="#listadoModal">Áreas presentes</button>
+      <button type="button" id="goMain" class="btn btn-outline-secondary my-3 mx-1" style="width:200px; height: 32px; padding-top: 2px" data-bs-toggle="modal" data-bs-target="#programasModal">Presente en</button>
     </div>
     <div class="col-2">
       <button type="button" id="goBack" class="btn btn-outline-secondary my-3 mx-1" style="width:200px; height: 32px; padding-top: 2px" routerLink="/areas/{{areaId}}/detalle" [disabled]="areaId==''" (click)="clearArea()">Regresar al área</button>
@@ -78,7 +78,7 @@
 </div>
 
 
-<!-- Modal Form 3 -->
+<!-- Modal Form 1 -->
 <div class="modal fade bd-example-modal-sm" id="listadoModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -100,6 +100,37 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#programasModal">Ver programas</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Form 2 -->
+<div class="modal fade bd-example-modal-sm" id="programasModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="programasModalLabel">Pertenece a los siguientes programas:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <ul>
+              <div  *ngFor="let prog of programas">
+                <li class="list-group-item"><u data-bs-dismiss="modal" (click)="writePrograma(prog.id)"routerLink="/programas/{{prog.id}}/detalle">{{prog.nombre}}</u></li>
+                <hr>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#listadoModal">Ver áreas</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>

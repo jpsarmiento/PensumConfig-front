@@ -5,8 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class CommunicationService {
 
+  private username = ''
   private programaPrev = ''
   private areaPrev = ''
+  private token = ''
 
 constructor() { }
 
@@ -24,5 +26,21 @@ constructor() { }
 
   writeAreaPrev(id: string) {
     this.areaPrev = id;
+  }
+
+  getToken() {
+    return this.token;
+  }
+
+  writeToken(token: string) {
+    this.token = token;
+  }
+
+  getUser() {
+    return this.username;
+  }
+
+  writeUser(username: string) {
+    this.username = username;
   }
 }

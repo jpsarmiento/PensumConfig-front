@@ -2,7 +2,7 @@
 <!-- NavBar -->
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(230, 235, 235);">
     <div class="container-fluid ms-1">
-      <a class="navbar-brand" href="#" (click)="clearPrev()">
+      <a class="navbar-brand" routerLink="" (click)="clearPrev()">
         <i class="fa fa-graduation-cap me-1 mt-1" aria-hidden="true" style="font-size:24px;color:rgb(25, 31, 31)"></i>
         PensumConfig</a>
     </div>
@@ -26,8 +26,13 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="requisitos" (click)="clearPrev()">Requisitos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!logged">
           <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" (click)="clearPrev()">
+            <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:24px;color:rgb(25, 31, 31)"></i>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="logged">
+          <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loggedModal" (click)="clearPrev()">
             <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:24px;color:rgb(25, 31, 31)"></i>
           </a>
         </li>
@@ -66,7 +71,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="loginLabel">Inicia sesión</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" id='closeLogin' class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="form-group mx-sm-3 mb-2">
@@ -79,8 +84,35 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="login()">Iniciar sesión</button>
+        <button type="button" class="btn btn-primary" (click)="login()">Iniciar sesión</button>
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- Modal Form 3 -->
+<div class="modal fade bd-example-modal-sm" id="loggedModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="logged">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sesión iniciada</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <ul>
+              <li class="list-group-item"><span style="font-weight:bold">Usuario:</span> {{getUsername()}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
