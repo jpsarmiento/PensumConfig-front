@@ -82,6 +82,20 @@
               Prioridad requerida
             </div>
           </div>
+
+          <!--Tipo-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="tipo">Tipo</label>
+            <select novalidate id="tipo" class="form-control" formControlName="tipo" placeholder="Tipo">
+              <option>Conocimiento</option>
+              <option>Semestre</option>
+            </select>
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+            areaForm.get('tipo')!.hasError('tipo') &&
+            areaForm.get('tipo')!.touched">
+              Tipo requerido
+            </div>
+          </div>
           <!--Creditos-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="creditos">Créditos</label>
@@ -154,6 +168,19 @@
               Prioridad requerida
             </div>
           </div>
+          <!--Tipo-->
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="tipo">Tipo</label>
+            <select novalidate id="tipo" class="form-control" formControlName="tipo" placeholder="Tipo">
+              <option>Conocimiento</option>
+              <option>Semestre</option>
+            </select>
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="
+            areaForm.get('tipo')!.hasError('tipo') &&
+            areaForm.get('tipo')!.touched">
+              Tipo requerido
+            </div>
+          </div>
           <!--Creditos-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="creditos">Créditos</label>
@@ -196,6 +223,8 @@
           <div class="row">
             <ul>
               <li class="list-group-item"><span style="font-weight:bold">Prioridad:</span> {{selectedArea.prioridad}}</li>
+              <hr>
+              <li class="list-group-item"><span style="font-weight:bold">Tipo:</span> {{selectedArea.tipo}}</li>
               <hr>
               <li class="list-group-item"><span style="font-weight:bold">Créditos:</span> {{selectedArea.creditos}}</li>
               <hr>

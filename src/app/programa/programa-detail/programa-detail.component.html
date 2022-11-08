@@ -12,8 +12,8 @@
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/University_of_Los_Andes_logo.svg/1200px-University_of_Los_Andes_logo.svg.png"
           alt="Logo Universidad de los Andes" />
       </div>
-
-      <a type="button" class="btn btn-outline-secondary my-3 mx-1" style="width:180px; height: 32px; padding-top: 2px" (click)="descargar()">Descargar</a>
+      <a type="button" class="btn btn-dark my-3" style="width:200px; height: 32px; padding-top: 2px; ; margin-left: -5px" (click)="descargarAreas()">Descargar por áreas</a>
+      <a type="button" class="btn btn-dark" style="width:200px; height: 32px; padding-top: 2px; margin-left: -5px;" (click)="descargarSemestres()">Descargar por semestres</a>
     </div>
     <div class="col">
       <dl>
@@ -26,13 +26,13 @@
         <hr />
         <div class="row">
           <div class="col-10">
-            <dt>Áreas:</dt>
+            <dt>Áreas del conocimiento:</dt>
           </div>
           <div class="col">
             <button type="button" class="btn btn-outline-success btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" routerLink="/programas/{{programaDetail.id}}/addarea">Asociar</button>
           </div>
         </div>
-        <div class="row" *ngFor="let area of areas">
+        <div class="row" *ngFor="let area of conocimiento">
           <div class="col-10">
           <dd>
             <u (click)="navegarArea()" routerLink="/areas/{{area.id}}/detalle">{{area.nombre}} - {{area.creditos}} créditos</u>
@@ -43,12 +43,33 @@
            </dd>
           </div>
           <div class="col">
-            <button type="button" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" class="btn btn-outline-danger btn-sm" (click)="deleteArea(area)">Quitar</button>
+            <button type="button" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" class="btn btn-outline-danger btn-sm" (click)="deleteConocimiento(area)">Quitar</button>
           </div>
         </div>
-
         <hr />
-
+        <div class="row">
+          <div class="col-10">
+            <dt>Semestres:</dt>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-sm" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" routerLink="/programas/{{programaDetail.id}}/addarea">Asociar</button>
+          </div>
+        </div>
+        <div class="row" *ngFor="let area of semestres">
+          <div class="col-10">
+          <dd>
+            <u (click)="navegarArea()" routerLink="/areas/{{area.id}}/detalle">{{area.nombre}} - {{area.creditos}} créditos</u>
+            <br>
+            <em>
+              {{getReglasTexto(area)}}
+            </em>
+           </dd>
+          </div>
+          <div class="col">
+            <button type="button" style="width:70px; height: 25px; padding-top: 1px; margin-bottom: 8px;" class="btn btn-outline-danger btn-sm" (click)="deleteSemestre(area)">Quitar</button>
+          </div>
+        </div>
+        <hr />
         <div class="row">
           <div class="col-10">
             <dt>Requisitos:</dt>

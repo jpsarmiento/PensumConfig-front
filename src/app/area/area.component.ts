@@ -44,6 +44,7 @@ export class AreaComponent implements OnInit {
     this.areaForm= this.formBuilder.group({
       nombre: [this.selectedArea.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       prioridad: [this.selectedArea.prioridad, [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      tipo: [this.selectedArea.tipo, [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
       creditos: [this.selectedArea.creditos, [Validators.required, Validators.min(0)]]
     })
   }
@@ -52,6 +53,7 @@ export class AreaComponent implements OnInit {
     this.areaForm= this.formBuilder.group({
       nombre: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       prioridad: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      tipo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
       creditos: ["", [Validators.required, Validators.min(0)]]
     })
   }

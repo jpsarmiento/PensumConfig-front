@@ -18,7 +18,8 @@ export class ProgramaDetailComponent implements OnInit {
 
   programaId!: string;
   @Input() programaDetail!: Programa;
-  areas: Array<Area> = [];
+  conocimiento: Array<Area> = [];
+  semestres: Array<Area> = [];
   requisitos: Array<Requisito> = [];
   programaForm! : FormGroup;
 
@@ -40,7 +41,16 @@ export class ProgramaDetailComponent implements OnInit {
 
   getAreas(programa: Programa): void {
     this.programaService.getAreas(programa.id).subscribe(areas => {
-      this.areas = areas
+      areas.forEach( (area) => {
+        if (area.tipo == 'Semestre') {
+          this.semestres.push(area);
+        }
+        else {
+          this.conocimiento.push(area);
+        }
+
+      })
+
     })
   }
 
@@ -49,9 +59,15 @@ export class ProgramaDetailComponent implements OnInit {
       this.requisitos = requisitos})
   }
 
-  deleteArea(area: Area) {
+  deleteConocimiento(area: Area) {
     this.programaService.deleteAreaPrograma(this.programaDetail.id, area.id).subscribe(response => {
-      this.areas = this.areas.filter(item => item.id != area.id)
+      this.conocimiento = this.conocimiento.filter(item => item.id != area.id)
+    })
+  }
+
+  deleteSemestre(area: Area) {
+    this.programaService.deleteAreaPrograma(this.programaDetail.id, area.id).subscribe(response => {
+      this.semestres = this.semestres.filter(item => item.id != area.id)
     })
   }
 
@@ -80,9 +96,19 @@ export class ProgramaDetailComponent implements OnInit {
     return rta
   }
 
-  descargar() {
-    var fileName = "programa_" + this.programaDetail.nombre + ".json"
-    var file = new Blob([JSON.stringify(this.programaDetail)], {type: 'application/json'})
+  descargarAreas() {
+    var fileName = "programa_" + this.programaDetail.nombre + "_areas.json"
+    var programaDescarga = this.programaDetail
+    programaDescarga.areas = this.conocimiento
+    var file = new Blob([JSON.stringify(programaDescarga)], {type: 'application/json'})
+    saveAs(file, fileName)
+  }
+
+  descargarSemestres() {
+    var fileName = "programa_" + this.programaDetail.nombre + "_semestres.json"
+    var programaDescarga = this.programaDetail
+    programaDescarga.areas = this.semestres
+    var file = new Blob([JSON.stringify(programaDescarga)], {type: 'application/json'})
     saveAs(file, fileName)
   }
 }
