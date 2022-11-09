@@ -27,20 +27,4 @@ constructor() { }
   writeAreaPrev(id: string) {
     this.areaPrev = id;
   }
-
-  getToken() {
-    return this.token;
-  }
-
-  writeToken(token: string) {
-    this.token = token;
-  }
-
-  getUser() {
-    return this.username;
-  }
-
-  writeUser(username: string) {
-    this.username = username;
-  }
 }
