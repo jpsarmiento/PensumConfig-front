@@ -26,12 +26,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="requisitos" (click)="clearPrev()">Requisitos</a>
         </li>
-        <li class="nav-item" *ngIf="!logged">
+        <li class="nav-item" *ngIf="getUsername()===null">
           <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" (click)="clearPrev()">
             <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:24px;color:rgb(25, 31, 31)"></i>
           </a>
         </li>
-        <li class="nav-item" *ngIf="logged">
+        <li class="nav-item" *ngIf="getUsername()!=null">
           <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loggedModal" (click)="clearPrev()">
             <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:24px;color:rgb(25, 31, 31)"></i>
           </a>
@@ -95,7 +95,7 @@
 <div class="modal fade bd-example-modal-sm" id="loggedModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content" *ngIf="logged">
+    <div class="modal-content" *ngIf="getUsername()!=null">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Sesión iniciada</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -110,7 +110,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cerrarSesion()">Cerrar sesión</button>
       </div>
     </div>
   </div>

@@ -64,10 +64,12 @@ export class AddRequisitoComponent implements OnInit {
         this.selected.forEach((requisito) => {
           this.addRequisitoPrograma(requisito)
         })
-          this.toastr.success("Las requisitos fueron agregados", "Programa actualizado")
         }
       else {
         this.toastr.error("No ha seleccionado ningún área para agregar al programa", "Error")
+      }
+      if(window.localStorage.getItem('token')!=null) {
+        this.toastr.success("Los requisitos fueron agregados", "Programa actualizado")
       }
     }
 

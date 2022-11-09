@@ -64,10 +64,12 @@ export class AddExamenComponent implements OnInit {
         this.selected.forEach((examen) => {
           this.addExamenRegla(examen)
         })
-          this.toastr.success("Los examenes fueron agregados", "Regla actualizada")
         }
       else {
         this.toastr.error("No ha seleccionado ningún examen para agregar a la regla", "Error")
+      }
+      if(window.localStorage.getItem('token')!=null) {
+        this.toastr.success("Los examenes fueron agregados", "Regla actualizada")
       }
     }
 

@@ -14,6 +14,7 @@ import { AreaModule } from './area/area.module';
 import { ProgramaModule } from './programa/programa.module';
 import { RequisitoModule } from './requisito/requisito.module';
 import { HomeComponent } from './home/home.component';
+import { InterceptorService } from './interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,11 +38,17 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule
   ],
   providers: [
+
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpErrorInterceptorService,
-    multi: true
-  }
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi:true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true
+      },
 ],
   bootstrap: [AppComponent]
 })

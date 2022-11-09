@@ -70,19 +70,15 @@
           <!--Tipo-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="tipo">Tipo</label>
-            <input novalidate id="tipo" class="form-control" formControlName="tipo" placeholder="Tipo de programa" />
+            <select novalidate id="tipo" class="form-control" formControlName="tipo" placeholder="Tipo">
+              <option value="" disabled selected hidden>Selecciona un tipo</option>
+              <option>Pregrado</option>
+              <option>Posgrado</option>
+            </select>
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
             programaForm.get('tipo')!.hasError('required') &&
             programaForm.get('tipo')!.touched">
               Tipo requerido
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="programaForm.get('tipo')!.hasError('minlength')">
-              El tipo debe ser Pregrado o Posgrado
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="programaForm.get('tipo')!.hasError('maxlength')">
-              El tipo debe ser Pregrado o Posgrado
             </div>
           </div>
           <!--Min gpa-->
@@ -149,19 +145,15 @@
           <!--Tipo-->
           <div class="form-group mx-sm-3 mb-2">
             <label for="tipo">Tipo</label>
-            <input novalidate id="tipo" class="form-control" formControlName="tipo" placeholder="Tipo" />
+            <select novalidate id="tipo" class="form-control" formControlName="tipo" placeholder="Tipo">
+              <option value="" disabled selected hidden>Selecciona un tipo</option>
+              <option>Pregrado</option>
+              <option>Posgrado</option>
+            </select>
             <div class="alert alert-danger alert-dismissible fade show" *ngIf="
             programaForm.get('tipo')!.hasError('required') &&
             programaForm.get('tipo')!.touched">
               Tipo requerido
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="programaForm.get('tipo')!.hasError('minlength')">
-              El tipo debe ser Pregrado o Posgrado
-            </div>
-            <div class="alert alert-danger alert-dismissible fade show"
-              *ngIf="programaForm.get('tipo')!.hasError('maxlength')">
-              El tipo debe ser Pregrado o Posgrado
             </div>
           </div>
           <!--Min gpa-->

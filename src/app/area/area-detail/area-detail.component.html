@@ -1,4 +1,4 @@
-<div class="container-fluid my-4 pb-4 ps-4 rounded" style="--bs-bg-opacity: 1; color:black; background-color:rgb(230, 235, 235);" >
+<div class="container-fluid my-4 pb-4 ps-4 rounded" style="--bs-bg-opacity: 1; color:black; background-color:rgb(230, 235, 235);" *ngIf="areaDetail">
   <div class="row">
     <div class="col-7">
       <p class="h3 p-3">Área: {{ areaDetail.nombre }}</p>
@@ -51,7 +51,6 @@
       </dl>
     </div>
   </div>
-</div>
 
 
 <!-- Modal Form 3 -->
@@ -83,3 +82,5 @@
 </div>
 
 
+
+</div>

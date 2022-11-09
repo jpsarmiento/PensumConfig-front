@@ -65,10 +65,12 @@ export class AddAreaComponent implements OnInit {
         this.selected.forEach((area) => {
           this.addAreaPrograma(area)
         })
-          this.toastr.success("Las areas fueron agregadas", "Programa actualizado")
         }
       else {
         this.toastr.error("No ha seleccionado ninguna área para agregar al programa", "Error")
+      }
+      if(window.localStorage.getItem('token')!=null) {
+        this.toastr.success("Las areas fueron agregadas", "Programa actualizado")
       }
     }
 

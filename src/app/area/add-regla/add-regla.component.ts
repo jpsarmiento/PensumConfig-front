@@ -65,10 +65,12 @@ export class AddReglaComponent implements OnInit {
         this.selected.forEach((regla) => {
           this.addReglaArea(regla)
         })
-          this.toastr.success("Las reglas fueron agregadas", "Área actualizada")
         }
       else {
         this.toastr.error("No ha seleccionado ninguna regla para agregar al área", "Error")
+      }
+      if(window.localStorage.getItem('token')!=null) {
+        this.toastr.success("Las reglas fueron agregadas", "Área actualizada")
       }
     }
 

@@ -14,7 +14,6 @@ export class AppComponent {
   title = 'PensumConfig-front';
 
   user!: User;
-  logged: Boolean = false;
 
   constructor(
     private communicationService: CommunicationService,
@@ -39,20 +38,22 @@ export class AppComponent {
   }
 
   getToken() {
-
     const modal = document.getElementById('closeLogin') as HTMLButtonElement;
-
     this.appService.login(this.user).subscribe(token =>{
       this.toastr.success('Bienvenido usuario '+this.user.username, "Sesión iniciada");
-      this.communicationService.writeToken(token.token)
-      this.communicationService.writeUser(this.user.username)
-      this.logged = true;
+      window.localStorage.setItem('token', token.token)
+      window.localStorage.setItem('user', this.user.username)
       modal.click()
     })
   }
 
   getUsername() {
-    return this.communicationService.getUser()
+    return window.localStorage.getItem('user')
+  }
+
+  cerrarSesion() {
+    window.localStorage.removeItem('user')
+    window.localStorage.removeItem('token')
   }
 
 }
