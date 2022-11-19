@@ -3,7 +3,6 @@ import { CommunicationService } from './communication.service';
 import { AppService } from './app.service'
 import { User } from './user';
 import { ToastrService } from 'ngx-toastr';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -54,6 +53,7 @@ export class AppComponent {
   cerrarSesion() {
     window.localStorage.removeItem('user')
     window.localStorage.removeItem('token')
+    this.toastr.success("Se ha cerrado la sesión correctamente","Sesión cerrada");
   }
 
 }

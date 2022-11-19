@@ -7,10 +7,11 @@ import { RouterModule } from '@angular/router';
 import { AddTerminoComponent } from './add-termino/add-termino.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { AddExamenComponent } from './add-examen/add-examen.component';
+import { AddCursoComponent } from './add-curso/add-curso.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, AppRoutingModule],
-  declarations: [ReglaComponent, ReglaDetailComponent, AddTerminoComponent, AddExamenComponent],
+  declarations: [ReglaComponent, ReglaDetailComponent, AddTerminoComponent, AddExamenComponent, AddCursoComponent],
   exports: [ReglaComponent]
 })
 export class ReglaModule { }

@@ -1,0 +1,36 @@
+<!-- Titulo y agregar -->
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-9">
+      <h3 style="color:rgb(230, 235, 235);"> Agregar cursos a la regla: </h3>
+    </div>
+    <div class="col-2">
+      <div class="input-group rounded">
+        <input type="search" id="filtro" class="form-control rounded" placeholder="Búsqueda" aria-label="Busqueda" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-dark pb-2" (click)="filtrar()">🔍︎</button>
+      </div>
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-outline-light" routerLink="/reglas/{{reglaDetail.id}}/detalle"
+        (click)="addCursosRegla()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Lista de cursos -->
+    <div class="col">
+      <div class="row">
+        <div class="col-2 mt-2" *ngFor="let c of cursos">
+          <div class="card text-center bg-light" style="--bs-bg-opacity: .93;">
+            <div class="card-body">
+              <h5 class="card-title"> <u style="color:rgb(32, 32, 32)">{{c.sigla}}-{{c.codigo}}</u></h5>
+              <h6 class="card-subtitle text-muted">{{c.nombre}}</h6>
+              <button type="button" class="btn btn-outline-primary mt-2" (click)="addCurso(c)">Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

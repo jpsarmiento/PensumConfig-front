@@ -10,6 +10,7 @@ import { AddAreaComponent } from './programa/add-area/add-area.component';
 import { AddRequisitoComponent } from './programa/add-requisito/add-requisito.component';
 import { ProgramaDetailComponent } from './programa/programa-detail/programa-detail.component';
 import { ProgramaComponent } from './programa/programa.component';
+import { AddCursoComponent } from './regla/add-curso/add-curso.component';
 import { AddExamenComponent } from './regla/add-examen/add-examen.component';
 import { AddTerminoComponent } from './regla/add-termino/add-termino.component';
 import { ReglaDetailComponent } from './regla/regla-detail/regla-detail.component';
@@ -43,6 +44,9 @@ const routes: Routes = [
           },
           {
             path: 'addterm', component: AddTerminoComponent
+          },
+          {
+            path: 'addcurso', component: AddCursoComponent
           },
           {
             path: 'addexamen', component: AddExamenComponent
